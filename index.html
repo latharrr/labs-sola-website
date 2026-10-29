@@ -614,8 +614,15 @@ new IntersectionObserver((es) => es.forEach(e => { e.target.classList.toggle('in
   const show = (i, focus) => { cur = (i + tabs.length) % tabs.length;
     tabs.forEach((t, k) => { const on = k === cur; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; panels[k].classList.toggle('on', on); panels[k].inert = !on; });
     if (focus) tabs[cur].focus(); };
-  tabs.forEach((t, i) => { t.addEventListener('click', () => show(i));
-    t.addEventListener('keydown', (e) => { const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); show(cur + d, true); } }); });
+  // steps to the next screen every 2.6 s while on screen; hovering or focusing holds it, a click restarts the count
+  const sec = document.getElementById('app');
+  let seen = false, held = false, timer = 0;
+  const tick = () => { clearTimeout(timer); if (seen && !held && !matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setTimeout(() => { show(cur + 1); tick(); }, 2600); };
+  tabs.forEach((t, i) => { t.addEventListener('click', () => { show(i); tick(); });
+    t.addEventListener('keydown', (e) => { const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); show(cur + d, true); tick(); } }); });
+  sec.addEventListener('pointerenter', () => { held = true; tick(); }); sec.addEventListener('pointerleave', () => { held = false; tick(); });
+  sec.addEventListener('focusin', () => { held = true; tick(); }); sec.addEventListener('focusout', () => { held = false; tick(); });
+  new IntersectionObserver((es) => { seen = es[0].isIntersecting; tick(); }, { threshold: .35 }).observe(sec);
 })();
 window.__ready = true;
 </script>
