@@ -182,11 +182,13 @@ html[data-motion=off] .eclipse-cta .copy>*{opacity:1;transform:none;filter:none;
 html[data-motion=off] .eclipse-cta .corona,html[data-motion=off] .eclipse-cta .halo{animation:none}
 
 /* 8 footer */
-footer{background:var(--bg2);padding:80px 24px 120px;color:var(--mute);font-size:14px}
+footer{background:var(--bg);padding:96px 24px 120px;color:var(--mute);font-size:14px}
 footer .cols{display:grid;grid-template-columns:2fr repeat(2,1fr);gap:32px;margin-bottom:56px}
 footer h3{margin:0 0 12px;color:var(--ink);font:480 13px Inter,sans-serif}
 footer .cols a{display:block;margin:6px 0}
 footer .cols a.logo{display:flex;margin:0}
+footer .about .line{margin:22px 0 10px;font:500 clamp(26px,2.6vw,34px)/1.1 "Inter Tight",sans-serif;letter-spacing:-.03em;color:var(--ink)}footer .about .line span{color:#e8692c;white-space:nowrap}
+footer .about p{margin:0;max-width:360px}
 footer .fine{border-top:1px solid var(--edge);padding-top:24px;font-size:13px;line-height:1.6}
 footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(20,20,28,.3)}
 
@@ -454,7 +456,7 @@ footer .land .fine{border-top:0}
 
 <footer>
   <div class="cols wrap">
-    <div><a class="logo" href="#top"><img src="img/sola-mark.svg" alt="">SOLA</a></div>
+    <div class="about"><a class="logo" href="#top"><img src="img/sola-mark.svg" alt="">SOLA</a><p class="line">Get paid. <span>Sola does the rest.</span></p><p>A fictional bank for freelancers, designed and built by Deepanshu Labs.</p></div>
     <div><h3>Product</h3><a href="#how">Accounts</a><a href="#how">Taxes</a><a href="#cards">Cards</a></div>
     <div><h3>Deepanshu Labs</h3><a href="https://deepanshulathar.com/labs/">About</a><a href="https://wa.me/919999602901">WhatsApp</a><a href="mailto:deepanshulathar@gmail.com">Email</a></div>
   </div>
