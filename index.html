@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sola, banking for freelancers</title>
+<title>Sola · Banking for freelancers</title>
+<meta name="description" content="The bank account for freelancers that sets aside tax and savings the moment money lands.">
+<meta property="og:title" content="Sola · Banking for freelancers">
+<meta property="og:description" content="Get paid. Sola does the rest.">
+<meta property="og:url" content="https://sola.143.lat/">
+<meta property="og:image" content="https://sola.143.lat/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/sola-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;480;560&family=Inter:wght@400;420;480&display=swap" rel="stylesheet">
@@ -17,11 +23,11 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.5 Inter,syst
 h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;font-weight:480;letter-spacing:-.03em;margin:0;text-wrap:balance}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1232px;margin:0 auto;padding:0 24px}
-.pill{display:inline-flex;align-items:center;height:40px;padding:0 20px;border-radius:32px;font:420 16px/1 Inter,sans-serif;background:var(--accent);color:#fff;border:0;cursor:pointer;transition:transform .3s var(--ease-out),filter .3s}
+.pill{display:inline-flex;align-items:center;height:40px;padding:0 20px;border-radius:999px;font:480 16px/1 Inter,sans-serif;background:linear-gradient(180deg,#6b7dff,#4a5de6);color:#fff;border:0;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.32),inset 0 -1px 0 rgba(0,0,0,.18),0 6px 16px -8px rgba(0,0,0,.55);transition:transform .4s var(--ease-out),filter .4s}
 @media (hover:hover){.pill:hover{transform:translateY(-1px);filter:brightness(1.08)}}
 .pill.ghost{background:rgba(255,255,255,.16);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);backdrop-filter:blur(10px)}
 
-/* nav (Mercury: logo left, links centre, log in + pill right) */
+/* nav */
 nav{position:fixed;inset:0 0 auto;z-index:50;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;transition:background .4s,backdrop-filter .4s}
 nav.solid{background:rgba(21,24,33,.72);backdrop-filter:blur(16px) saturate(1.4)}
 .logo{display:flex;align-items:center;gap:10px;font:560 15px/1 "Inter Tight",sans-serif;letter-spacing:.22em}
@@ -34,23 +40,47 @@ nav .right{display:flex;align-items:center;gap:18px;font-size:16px;font-weight:4
 /* 1 hero: the Level 1 showpiece, full bleed */
 .hero{position:relative;height:100vh;height:100svh;min-height:720px;overflow:hidden;background:radial-gradient(120% 70% at 50% 100%,#3a2a3a 0%,#1d1d2b 45%,var(--bg) 75%)}
 .hero .stage{position:absolute;inset:0;overflow:hidden}
-.hero .stage video{position:absolute;left:0;top:0;width:100%;height:122%;object-fit:cover;object-position:60% 50%;transform-origin:62% 60%;animation:drift 26s ease-in-out infinite alternate}
+.hero .stage video{position:absolute;left:0;top:8svh;width:100%;height:132%;-webkit-mask-image:linear-gradient(transparent,#000 9%);mask-image:linear-gradient(transparent,#000 9%);object-fit:cover;object-position:60% 50%;transform-origin:62% 60%;animation:drift 26s ease-in-out infinite alternate}
 @keyframes drift{to{transform:scale(1.06) translateY(-1%)}}
 .hero .stage:after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(14,17,26,.62) 0%,rgba(14,17,26,.34) 34%,rgba(14,17,26,0) 56%,rgba(21,24,33,0) 74%,var(--bg) 100%)}
-.hero .copy{position:relative;z-index:2;text-align:center;padding-top:15vh}
-.hero h1,.hero p{text-shadow:0 1px 24px rgba(10,12,20,.35)}
-.hero h1{font-size:clamp(40px,5vw,56px);line-height:1.1}
-.hero p{max-width:520px;margin:14px auto 30px;color:#c9cad6;font-size:18px}
-.signup{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.signup input{height:40px;width:260px;border-radius:32px;border:1px solid rgba(255,255,255,.24);background:rgba(10,12,20,.42);color:var(--ink);padding:0 18px;font:400 15px Inter,sans-serif;backdrop-filter:blur(10px)}
-.signup input::placeholder{color:#b9bac8}
+.hero .copy{position:relative;z-index:2;text-align:center;padding-top:12vh}
+.hero h1{text-shadow:0 1px 2px rgba(8,10,18,.18)}
+.hero p{text-shadow:0 1px 18px rgba(8,10,18,.4)}
+.hero h1{font-size:clamp(48px,5.4vw,78px);line-height:.98;font-weight:600;letter-spacing:-.045em}
+.hero h1 span{display:block}
+.hero h1 .l2{color:#ffbe8a}
+.hero p{max-width:540px;margin:18px auto 28px;color:#e2e3ec;font-size:19px;line-height:1.5}
+.signup{position:relative;display:flex;align-items:center;gap:6px;width:min(500px,100%);margin:0 auto;padding:6px;border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.06));
+  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -1px 1px rgba(255,255,255,.07),0 28px 70px -28px rgba(4,6,14,.75);
+  transition:box-shadow .5s var(--ease-soft)}
+.signup:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.72),rgba(255,255,255,.14) 30%,rgba(255,255,255,.04) 62%,rgba(255,200,155,.55));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.signup:focus-within{box-shadow:inset 0 1px 0 rgba(255,255,255,.48),0 0 0 4px rgba(255,255,255,.13),0 28px 70px -28px rgba(4,6,14,.75)}
+.signup input{flex:1;min-width:0;height:50px;border:0;background:transparent;color:#fff;padding:0 6px 0 22px;font:400 16px Inter,sans-serif;outline:none}
+.signup input::placeholder{color:rgba(255,255,255,.78)}
+.signup .pill{height:50px;padding:0 26px;flex:none}
+.signup .trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.signup .done{position:absolute;inset:6px;display:flex;align-items:center;justify-content:center;margin:0;border-radius:999px;color:#fff;font-weight:480;font-size:16px;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .6s var(--ease-soft),transform .8s var(--ease-out)}
+.signup input,.signup .pill{transition:opacity .4s var(--ease-soft)}
+.signup.sent input,.signup.sent .pill{opacity:0;pointer-events:none}
+.signup.sent .done{opacity:1;transform:none}
+.signup.busy .pill{opacity:.7;cursor:progress}
+.formnote{min-height:22px;margin:12px 0 0;font-size:14px;font-weight:500;color:#fff;text-shadow:0 1px 12px rgba(8,10,18,.75)}
+.formnote.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.hero .more{display:inline-flex;align-items:center;gap:8px;margin-top:20px;min-height:44px;color:#eef0f8;font-size:15px;font-weight:450;text-shadow:0 1px 16px rgba(8,10,18,.5)}
+.hero .more span{transition:transform .45s var(--ease-out)}
+@media (hover:hover){.hero .more:hover span{transform:translateX(4px)}}
 
-/* 2 built-for strip (Mercury: "Loved by") */
+/* 2 built-for strip */
 .strip{padding:72px 0 48px;text-align:center}
 .strip h2{font-size:clamp(28px,3vw,42px);line-height:1.15;max-width:760px;margin:0 auto 40px}
 .marquee{overflow:hidden;mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.marquee .row{display:flex;width:max-content;animation:mq 40s linear infinite}
-.marquee span{padding:0 34px;font:480 22px/1 "Inter Tight",sans-serif;color:#9496aa;white-space:nowrap}
+.marquee .row{display:flex;width:max-content;animation:mq 46s linear infinite}
+.logo-item{display:flex;align-items:center;gap:12px;padding:0 38px;color:#c8cad8;font:520 22px/1 "Inter Tight",sans-serif;letter-spacing:-.02em;white-space:nowrap}
+.logo-item img{width:26px;height:26px;filter:invert(1);opacity:.88}
 @keyframes mq{to{transform:translateX(-50%)}}
 html[data-motion=off] .marquee .row,html[data-motion=off] .hero .stage video{animation:none}
 
@@ -72,12 +102,12 @@ html[data-motion=off] .marquee .row,html[data-motion=off] .hero .stage video{ani
 #film .cap .w{display:inline-block;opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .7s cubic-bezier(.33,1,.68,1),transform .9s cubic-bezier(.16,1,.3,1),filter .7s cubic-bezier(.33,1,.68,1)}
 #film .cap.on .w{opacity:1;transform:none;filter:blur(0)}
 #film .cap:not(.on) .w{transition-delay:0s!important;transform:translateY(-14px)}
-#film .cap p{opacity:0;transition:opacity .6s .2s;color:var(--mute);max-width:380px}#film .cap.on p{opacity:1}
+#film .cap p{text-wrap:pretty;opacity:0;transition:opacity .6s .2s;color:var(--mute);max-width:380px}#film .cap.on p{opacity:1}
 #film .steps{position:absolute;left:0;bottom:0;display:flex;gap:8px;color:var(--ink)}
 #film .steps i{width:44px;height:3px;border-radius:3px;background:rgba(127,127,127,.25);overflow:hidden;position:relative}
 #film .steps b{position:absolute;inset:0;width:0;background:currentColor}
 
-/* 5 how it works, warm light band, split list left + island right (Mercury: "Everything you do with money") */
+/* 5 how it works, warm light band, split list left + island right */
 .light{background:var(--cream);color:var(--ink-l);position:relative}
 .fade-in,.fade-out{height:280px}
 .fade-in{background:linear-gradient(var(--bg),var(--cream))}
@@ -90,7 +120,7 @@ html[data-motion=off] .marquee .row,html[data-motion=off] .hero .stage video{ani
 .how li span{display:block;color:var(--mute-l);font-size:15px;margin-top:4px}
 .how .link{font-size:15px;text-decoration:underline;text-underline-offset:4px}
 
-/* 6 three cards (Mercury: "Standard protection stops short") */
+/* 6 three cards */
 .cards{padding:120px 24px 40px}
 .cards h2{font-size:clamp(28px,3vw,42px);line-height:1.15;max-width:640px;margin-bottom:40px}
 .cards .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -130,20 +160,26 @@ html[data-motion=off] .eclipse-cta .corona,html[data-motion=off] .eclipse-cta .h
 
 /* 8 footer */
 footer{background:var(--bg2);padding:80px 24px 120px;color:var(--mute);font-size:14px}
-footer .cols{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:32px;margin-bottom:56px}
+footer .cols{display:grid;grid-template-columns:2fr repeat(2,1fr);gap:32px;margin-bottom:56px}
 footer h4{margin:0 0 12px;color:var(--ink);font:480 13px Inter,sans-serif}
 footer .cols a{display:block;margin:6px 0}
-footer .fine{border-top:1px solid var(--edge);padding-top:24px;font-size:12px;line-height:1.6}
+footer .cols a.logo{display:flex;margin:0}
+footer .fine{border-top:1px solid var(--edge);padding-top:24px;font-size:13px;line-height:1.6}
+footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}
 
+/* short laptop screens: smaller headline, cabin a little lower */
+@media (min-width:861px) and (max-height:820px){.hero .copy{padding-top:10vh}.hero h1{font-size:clamp(44px,4.6vw,64px)}.hero .stage video{height:142%}}
 @media (max-width:860px){
   nav .links,nav .right .login{display:none}
   nav .right .pill{transition:opacity .45s cubic-bezier(.33,1,.68,1)}
   nav.cta-off .right .pill{opacity:0;pointer-events:none}
   .hero .copy{padding:11svh 20px 0}
-  .hero h1{font-size:31px;line-height:1.12}
-  .hero p{font-size:16px;margin:12px auto 24px}
+  .hero h1{font-size:min(9.2vw,40px);line-height:1}
+  .hero p{font-size:16px;margin:16px auto 26px}
+  .signup{width:100%;max-width:360px}.signup input{padding-left:18px}.signup .pill{padding:0 18px;font-size:15px}
+  .logo-item{font-size:19px;padding:0 26px}.logo-item img{width:22px;height:22px}
   .strip{padding:56px 0 32px}.strip h2{font-size:28px;margin-bottom:28px}
-  #say{height:auto}#say .pin{position:static;height:auto;padding:24px 20px 72px}#say p{font-size:31px}
+  #say{height:auto}[data-wordlight] .w{color:var(--ink)}[data-wordlight] .w.hi{color:#ffb877}#say .pin{position:static;height:auto;padding:24px 20px 72px}#say p{font-size:31px}
   .strip{padding-bottom:16px}
   #film{height:260vh}
   #film .stage{grid-template-columns:1fr;gap:16px;align-content:center;padding:0 20px}#film .copy{height:150px}
@@ -166,18 +202,11 @@ footer .fine{border-top:1px solid var(--edge);padding-top:24px;font-size:12px;li
   .pill{height:44px}
   footer .cols a.logo{display:flex;padding:0}
   nav .logo,footer .logo{min-height:44px}
-  .ms-pill{position:static!important;margin:0 auto 32px;width:max-content}
-  .signup{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:350px;margin:0 auto}
-  .signup input{grid-column:1/-1;width:100%;height:46px}
-  .signup input::placeholder{color:#d3d4de}
-  .signup .pill{height:46px;justify-content:center;padding:0 10px;font-size:15px;white-space:nowrap}
   .eclipse-cta .copy>*{opacity:1;transform:none;filter:none;transition:none}
   .eclipse-cta .ring{transition-delay:0s}
-  .ms-pill button{padding:16px 16px!important}
   .hero .stage video{object-position:50% 50%;top:7svh;height:126%;-webkit-mask-image:linear-gradient(transparent,#000 10%);mask-image:linear-gradient(transparent,#000 10%)}
   .hero .stage:after{background:linear-gradient(rgba(14,17,26,.7) 0%,rgba(14,17,26,.46) 36%,rgba(14,17,26,0) 56%,rgba(21,24,33,0) 86%,var(--bg) 100%)}
   .hero p{color:#e4e5ee}
-  .pill.ghost{background:rgba(10,12,20,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.34)}
   .how{grid-template-columns:1fr;gap:40px;padding:40px 20px 80px}
   .cards .grid{grid-template-columns:1fr}
   .eclipse-cta .copy .pill{white-space:nowrap}
@@ -205,22 +234,25 @@ footer .fine{border-top:1px solid var(--edge);padding-top:24px;font-size:12px;li
     </video>
   </div>
   <div class="copy">
-    <h1 class="rise">Get paid. Sola does the rest.</h1>
-    <p class="rise" style="--d:.1s">A bank account for freelancers that sets aside tax and savings the moment money lands.</p>
-    <form class="signup rise" style="--d:.2s" onsubmit="return false">
-      <input type="email" placeholder="Enter your email" aria-label="Email">
-      <button class="pill">Open account</button>
-      <a class="pill ghost" href="#how">See how it works</a>
+    <h1 class="rise"><span class="l1">Get paid.</span><span class="l2">Sola does the rest.</span></h1>
+    <p class="rise" style="--d:.1s">The bank account for freelancers that sets aside tax and savings the moment money lands.</p>
+    <form class="signup rise" style="--d:.2s" id="signup" novalidate>
+      <input type="email" name="email" placeholder="Enter your email" aria-label="Email" autocomplete="email" required>
+      <input class="trap" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="pill" type="submit">Open account</button>
+      <p class="done" aria-hidden="true">Check your inbox. Deepanshu will be in touch.</p>
     </form>
+    <p class="formnote" id="formnote" role="status" aria-live="polite"></p>
+    <a class="more rise" style="--d:.3s" href="#how">See how it works <span aria-hidden="true">→</span></a>
   </div>
 </header>
 
 <!-- 2 built for -->
 <section class="strip">
-  <h2 class="rise wrap">Made for people who send invoices, not payroll.</h2>
-  <div class="marquee" aria-hidden="true"><div class="row">
-    <span>Designers</span><span>Developers</span><span>Writers</span><span>Photographers</span><span>Illustrators</span><span>Translators</span><span>Editors</span><span>Consultants</span>
-    <span>Designers</span><span>Developers</span><span>Writers</span><span>Photographers</span><span>Illustrators</span><span>Translators</span><span>Editors</span><span>Consultants</span>
+  <h2 class="rise wrap">Get paid from anywhere you already work.</h2>
+  <div class="marquee" role="img" aria-label="Upwork, Fiverr, Stripe, PayPal, Wise, Payoneer, Gumroad and Toptal"><div class="row">
+    <span class="logo-item"><img src="img/logos/upwork.svg" alt="">Upwork</span><span class="logo-item"><img src="img/logos/fiverr.svg" alt="">Fiverr</span><span class="logo-item"><img src="img/logos/stripe.svg" alt="">Stripe</span><span class="logo-item"><img src="img/logos/paypal.svg" alt="">PayPal</span><span class="logo-item"><img src="img/logos/wise.svg" alt="">Wise</span><span class="logo-item"><img src="img/logos/payoneer.svg" alt="">Payoneer</span><span class="logo-item"><img src="img/logos/gumroad.svg" alt="">Gumroad</span><span class="logo-item"><img src="img/logos/toptal.svg" alt="">Toptal</span>
+    <span class="logo-item"><img src="img/logos/upwork.svg" alt="">Upwork</span><span class="logo-item"><img src="img/logos/fiverr.svg" alt="">Fiverr</span><span class="logo-item"><img src="img/logos/stripe.svg" alt="">Stripe</span><span class="logo-item"><img src="img/logos/paypal.svg" alt="">PayPal</span><span class="logo-item"><img src="img/logos/wise.svg" alt="">Wise</span><span class="logo-item"><img src="img/logos/payoneer.svg" alt="">Payoneer</span><span class="logo-item"><img src="img/logos/gumroad.svg" alt="">Gumroad</span><span class="logo-item"><img src="img/logos/toptal.svg" alt="">Toptal</span>
   </div></div>
 </section>
 
@@ -282,12 +314,10 @@ footer .fine{border-top:1px solid var(--edge);padding-top:24px;font-size:12px;li
     <div><a class="logo" href="#"><img src="img/sola-mark.svg" alt="">SOLA</a></div>
     <div><h4>Product</h4><a href="#how">Accounts</a><a href="#how">Taxes</a><a href="#cards">Cards</a></div>
     <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a></div>
-    <div><h4>Made with</h4><a href="https://www.byteplus.com/en/product/modelark">BytePlus ModelArk</a><a href="https://claude.com/claude-code">Claude Code</a></div>
   </div>
-  <div class="fine wrap">Sola is a fictional brand made for a demo. It is not a bank and holds no money. Layout after mercury.com.</div>
+  <div class="fine wrap">© 2026 Sola. A concept by <a href="https://deepanshulathar.com/labs/">Deepanshu Labs</a>.</div>
 </footer>
 
-<script src="vendor/motion-switch.js"></script>
 <script src="vendor/engine.js"></script>
 <script src="vendor/reveal.js"></script>
 <script src="vendor/word-light.js"></script>
@@ -308,7 +338,7 @@ const PHONE = matchMedia('(max-width: 860px)').matches;  // cropped 4:5 frames f
   // frames stream only once the film is near, so the hero loads first
   else new IntersectionObserver((es, o) => { if (!es[0].isIntersecting) return; o.disconnect(); MotionEngine.Scrub({
     blend: true, lerp: 0.09, cover: true, dpr: 2, fps: 24,
-    canvas: document.getElementById('filmc'), driver: film, count: PHONE ? 114 : 241,
+    canvas: document.getElementById('filmc'), driver: film, count: PHONE ? 114 : 228,
     src: (i) => `${PHONE ? 'frames-m' : 'frames'}/f_${String(i + 1).padStart(4, '0')}.jpg`,
     onProgress: (p) => filmProgress(p)
   }); }, { rootMargin: '1500px 0px' }).observe(film);
@@ -372,6 +402,22 @@ new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.
     .observe(document.getElementById('top'));
   new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)); nav.classList.toggle('cta-off', seen.size > 0); }, { threshold: .15 })
     .observe(document.getElementById('close')); })();
+(() => { const f = document.getElementById('signup'), note = document.getElementById('formnote'), btn = f.querySelector('.pill');
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = f.email.value.trim();
+    if (!f.email.checkValidity() || !email) { note.textContent = 'That email does not look right. Try again?'; f.email.focus(); return; }
+    note.textContent = ''; f.classList.add('busy'); btn.textContent = 'Sending…'; btn.disabled = true;
+    try {
+      const r = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, company: f.company.value }) });
+      if (!r.ok) throw new Error(r.status);
+      f.classList.add('sent'); note.classList.add('sr'); note.textContent = 'Sent. Check your inbox. Deepanshu will be in touch.';
+    } catch {
+      note.textContent = 'Could not send just now. Please try again in a moment.';
+      btn.textContent = 'Open account'; btn.disabled = false;
+    } finally { f.classList.remove('busy'); }
+  });
+})();
 window.__ready = true;
 </script>
 </body>

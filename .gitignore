@@ -3,7 +3,6 @@
 !.gitignore
 !README.md
 !index.html
-!design.md
 !vendor/
 !vendor/*.js
 !vendor/*.css
@@ -17,3 +16,7 @@
 !loops/
 !loops/hero-web.mp4
 !loops/hero-web-sm.mp4
+!img/logos/
+!img/logos/*.svg
+!api/
+!api/subscribe.mjs
