@@ -60,7 +60,8 @@ nav .right{display:flex;align-items:center;gap:18px;font-size:16px;font-weight:4
 /* 1 hero: the Level 1 showpiece, full bleed */
 .hero{position:relative;height:100vh;height:100svh;min-height:720px;overflow:hidden;background:linear-gradient(#f6efec 0%,#c0b0b4 34%)}
 .hero .stage{position:absolute;inset:0;overflow:hidden}
-.hero .stage video{position:absolute;left:0;bottom:0;width:100%;height:auto;aspect-ratio:2062/928;min-height:58%;object-fit:cover;object-position:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 22%);mask-image:linear-gradient(transparent,#000 22%)}
+.hero .stage video,.hero .stage .still{position:absolute;left:0;bottom:0;width:100%;height:auto;aspect-ratio:2062/928;min-height:58%;object-fit:cover;object-position:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 22%);mask-image:linear-gradient(transparent,#000 22%)}
+.hero .stage video{-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 49%,transparent 55%);mask-image:linear-gradient(transparent,#000 22%,#000 49%,transparent 55%)}
 .hero .stage:after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(251,248,244,0) 84%,var(--bg) 100%)}
 .hero .copy{position:relative;z-index:2;text-align:center;padding-top:12vh}
 .hero h1{text-shadow:none}
@@ -110,22 +111,22 @@ html[data-motion=off] .hero .stage video{animation:none}
 html[data-motion=off] [data-wordlight] .w{color:var(--ink)}html[data-motion=off] [data-wordlight] .w.hi{color:#e8692c}
 
 /* 3 statement, word light */
-#say{height:240vh}
+#say{height:170vh}
 #say .pin{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;padding:0 24px}
 #say p{font:480 clamp(34px,4.6vw,64px)/1.12 "Inter Tight",sans-serif;letter-spacing:-.03em;max-width:1000px;text-align:center;margin:0}
 [data-wordlight] .w{color:rgba(20,20,28,.13);transition:color .9s cubic-bezier(.33,1,.68,1)}
 [data-wordlight] .w.on{color:var(--ink)}[data-wordlight] .w.hi.on{color:#e8692c}
 
 /* 4 film, framed right, captions left */
-#film{position:relative;height:340vh}
+#film{position:relative;height:250vh}
 #film .stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-columns:minmax(300px,.8fr) 1.4fr;gap:56px;align-items:center;max-width:1320px;margin:0 auto;padding:0 40px}
 #film .screen{position:relative;aspect-ratio:16/10;border-radius:22px;overflow:hidden;box-shadow:0 40px 100px -46px rgba(20,33,61,.5),0 0 0 1px var(--edge);background:#ebe5dd}
 #film canvas{position:absolute;inset:0;width:100%;height:100%}
 #film .copy{position:relative;height:300px}
 #film .cap{position:absolute;inset:0}
 #film .cap h2{font-size:clamp(38px,4vw,58px);line-height:1.04;margin:14px 0 16px}
-#film .cap .w{display:inline-block;opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .7s cubic-bezier(.33,1,.68,1),transform .9s cubic-bezier(.16,1,.3,1),filter .7s cubic-bezier(.33,1,.68,1)}
-#film .cap.on .w{opacity:1;transform:none;filter:blur(0)}
+#film .cap .w{display:inline-block;opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.33,1,.68,1),transform .9s cubic-bezier(.16,1,.3,1)}
+#film .cap.on .w{opacity:1;transform:none}
 #film .cap:not(.on) .w{transition-delay:0s!important;transform:translateY(-14px)}
 #film .cap p{text-wrap:pretty;opacity:0;transition:opacity .6s .2s;color:var(--mute);max-width:380px}#film .cap.on p{opacity:1}
 #film .steps{position:absolute;left:0;bottom:0;display:flex;gap:8px;color:var(--ink)}
@@ -192,7 +193,7 @@ footer .fine a{color:#fff;text-decoration:underline;text-underline-offset:3px;te
   .strip{padding:56px 0 32px}.strip h2{font-size:28px;margin-bottom:28px}
   #say{height:auto}[data-wordlight] .w{color:var(--ink)}[data-wordlight] .w.hi{color:#e8692c}#say .pin{position:static;height:auto;padding:24px 20px 72px}#say p{font-size:31px}
   .strip{padding-bottom:16px}
-  #film{height:260vh}
+  #film{height:200vh}
   #film .stage{grid-template-columns:1fr;gap:16px;align-content:center;padding:0 20px}#film .copy{height:150px}
   #film .cap h2{font-size:30px;margin:8px 0 8px}#film .cap p{font-size:15px}
   #film .screen{aspect-ratio:3/4;width:min(100%,calc(62svh * .75));justify-self:center}
@@ -207,7 +208,7 @@ footer .fine a{color:#fff;text-decoration:underline;text-underline-offset:3px;te
   .pill{height:44px}
   footer .cols a.logo{display:flex;padding:0}
   nav .logo,footer .logo{min-height:44px}
-  .hero{background:linear-gradient(#f8efea 0%,#e4c3b8 20%)}.hero .stage video{aspect-ratio:522/928;min-height:0;-webkit-mask-image:linear-gradient(transparent,#000 14%);mask-image:linear-gradient(transparent,#000 14%)}
+  .hero{background:linear-gradient(#f8efea 0%,#e4c3b8 20%)}.hero .stage video,.hero .stage .still{aspect-ratio:522/928;min-height:0;-webkit-mask-image:linear-gradient(transparent,#000 14%);mask-image:linear-gradient(transparent,#000 14%)}.hero .stage video{-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 49%,transparent 55%);mask-image:linear-gradient(transparent,#000 14%,#000 49%,transparent 55%)}
   
   .hero p{color:#2f3140}
   .how{grid-template-columns:1fr;gap:40px;padding:40px 20px 80px}
@@ -301,6 +302,7 @@ html.lite *{-webkit-backdrop-filter:none!important;backdrop-filter:none!importan
 <!-- 1 hero: Level 1 showpiece -->
 <header class="hero" id="top">
   <div class="stage" data-xray="Hero loop · Seedance 1.0 video, looped forwards and back in code" data-xray-tool="ai">
+    <picture><source media="(max-width: 860px)" srcset="img/hero-still-m.jpg"><img class="still" src="img/hero-still.jpg" alt="" fetchpriority="high"></picture>
     <video id="herovid" muted loop playsinline preload="none" poster="img/hero-poster.jpg" aria-hidden="true">
       <source src="loops/hero-web-sm.mp4" type="video/mp4" media="(max-width: 860px)">
       <source src="loops/hero-web.mp4" type="video/mp4">
@@ -408,9 +410,9 @@ html.lite *{-webkit-backdrop-filter:none!important;backdrop-filter:none!importan
 <section class="cards wrap" id="cards">
   <h2 class="rise">Built for the way you actually get paid.</h2>
   <div class="grid" data-stagger>
-    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c1.jpg" alt="A passport, a map and coffee on a sunny desk by the sea" loading="lazy"></div><h3>Paid from anywhere</h3><p>Send an invoice in your client's currency and get it in yours.</p></article>
-    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c2.jpg" alt="Envelopes held by a wooden clip beside a sprig of lavender" loading="lazy"></div><h3>Tax, handled quietly</h3><p>When the bill comes, the money is already waiting.</p></article>
-    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c3.jpg" alt="An indigo card beside a laptop at sunset" loading="lazy"></div><h3>A card with good sense</h3><p>It spends from what is left, never from the tax pot.</p></article>
+    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c1.jpg" alt="A passport, a map and coffee on a sunny desk by the sea" loading="lazy" decoding="async"></div><h3>Paid from anywhere</h3><p>Send an invoice in your client's currency and get it in yours.</p></article>
+    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c2.jpg" alt="Envelopes held by a wooden clip beside a sprig of lavender" loading="lazy" decoding="async"></div><h3>Tax, handled quietly</h3><p>When the bill comes, the money is already waiting.</p></article>
+    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c3.jpg" alt="An indigo card beside a laptop at sunset" loading="lazy" decoding="async"></div><h3>A card with good sense</h3><p>It spends from what is left, never from the tax pot.</p></article>
   </div>
 </section>
 
