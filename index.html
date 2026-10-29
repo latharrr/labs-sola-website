@@ -254,12 +254,12 @@ footer .fine a{color:#fff;text-decoration:underline;text-underline-offset:3px;te
 .cardart{aspect-ratio:1.6;border-radius:16px;padding:18px;display:flex;justify-content:space-between;align-items:flex-start;color:#fff;font:600 13px/1 "Inter Tight",sans-serif;letter-spacing:.24em;background:radial-gradient(120% 120% at 100% 0%,#8f86ff 0%,transparent 50%),linear-gradient(135deg,#2c2f8f,#191a4d);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
 .cardart i{width:34px;height:26px;border-radius:6px;background:linear-gradient(135deg,#ffd7a8,#ffb877)}
 /* sky band */
-.sky{position:relative;min-height:min(86vh,820px);padding:64px 0;display:grid;place-items:center;text-align:center;overflow:hidden;background:#f3dccf}
-.sky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sky{position:relative;min-height:min(62vh,580px);padding:64px 0;margin:24px 0;display:grid;place-items:center;text-align:center;overflow:hidden;background:#f3dccf}
+.sky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%}
 .sky:before,.sky:after{content:"";position:absolute;left:0;right:0;z-index:1;pointer-events:none}
-.sky:before{top:0;height:30%;background:linear-gradient(var(--cream),rgba(248,244,241,0))}
-.sky:after{bottom:0;height:42%;background:linear-gradient(rgba(21,24,33,0),var(--bg))}
-.sky-copy{position:relative;z-index:2;color:var(--ink-l);padding:0 24px;margin-top:-6vh}
+.sky:before{top:0;height:18%;background:linear-gradient(var(--bg),rgba(251,248,244,0))}
+.sky:after{bottom:0;height:18%;background:linear-gradient(rgba(251,248,244,0),var(--bg))}
+.sky-copy{position:relative;z-index:2;color:var(--ink-l);padding:0 24px}
 .sky-copy .tag{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .sky h2{font:500 clamp(40px,6vw,84px)/1.02 "Inter Tight",sans-serif;letter-spacing:-.035em;margin:18px 0 14px}
 .sky p{margin:0 auto;max-width:460px;color:#3b3550;font-size:18px}
@@ -283,7 +283,7 @@ footer .fine a{color:#fff;text-decoration:underline;text-underline-offset:3px;te
 @media (max-width:860px){
   #app{padding-bottom:88px}.app,.faq{grid-template-columns:1fr;gap:32px;padding:0 20px}.faq{padding:16px 20px 88px}
   .app h2,.faq h2{font-size:28px}.appstage{min-height:400px;border-radius:22px}.tabs button{padding:12px 14px}
-  .sky{min-height:72svh}.sky h2{font-size:44px}.sky p{font-size:16px;padding:0 8px}
+  .sky{min-height:54svh}.sky h2{font-size:44px}.sky p{font-size:16px;padding:0 8px}
   
 }
 html.lite *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
@@ -400,11 +400,6 @@ html.lite *{-webkit-backdrop-filter:none!important;backdrop-filter:none!importan
   </div>
 </section>
 
-<!-- 5c a breath of sky between the light and dark worlds -->
-<section class="sky" aria-labelledby="sky-h">
-  <img src="img/sky.jpg" srcset="img/sky-m.jpg 1200w, img/sky.jpg 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
-  <div class="sky-copy wrap"><span class="tag rise">Made for freelancers</span><h2 class="rise" id="sky-h">Your money, finally calm.</h2><p class="rise">No spreadsheets. No guessing. Every payment lands already sorted.</p></div>
-</section>
 
 <!-- 6 three cards: Level 2 stills -->
 <section class="cards wrap" id="cards">
@@ -414,6 +409,12 @@ html.lite *{-webkit-backdrop-filter:none!important;backdrop-filter:none!importan
     <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c2.jpg" alt="Envelopes held by a wooden clip beside a sprig of lavender" loading="lazy" decoding="async"></div><h3>Tax, handled quietly</h3><p>When the bill comes, the money is already waiting.</p></article>
     <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c3.jpg" alt="An indigo card beside a laptop at sunset" loading="lazy" decoding="async"></div><h3>A card with good sense</h3><p>It spends from what is left, never from the tax pot.</p></article>
   </div>
+</section>
+
+<!-- 5c a breath of sky between the light and dark worlds -->
+<section class="sky" aria-labelledby="sky-h">
+  <img src="img/sky.jpg" srcset="img/sky-m.jpg 1200w, img/sky.jpg 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  <div class="sky-copy wrap"><span class="tag rise">Made for freelancers</span><h2 class="rise" id="sky-h">Your money, finally calm.</h2><p class="rise">No spreadsheets. No guessing. Every payment lands already sorted.</p></div>
 </section>
 
 <!-- 6b questions -->
@@ -457,7 +458,7 @@ const PHONE = matchMedia('(max-width: 860px)').matches;  // cropped 4:5 frames f
     addEventListener('scroll', () => { if (!q) { q = true; requestAnimationFrame(t); } }, { passive: true }); t(); }
   // frames stream only once the film is near, so the hero loads first
   else new IntersectionObserver((es, o) => { if (!es[0].isIntersecting) return; o.disconnect();
-    const count = PHONE ? 114 : 228, off = () => MotionEngine.reduced || !!(window.Motion && Motion.mode === 'off');
+    const count = PHONE ? 121 : 241, off = () => MotionEngine.reduced || !!(window.Motion && Motion.mode === 'off');
     const scrub = window.filmScrub = MotionEngine.Scrub({
       blend: true, lerp: 0.2, cover: true, dpr: PHONE ? 2 : 1, fps: 24, aheadSec: 0.75, behindSec: 0.5,
       canvas: document.getElementById('filmc'), driver: film, count, frozen: off,
