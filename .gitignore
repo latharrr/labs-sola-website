@@ -1,0 +1,19 @@
+# allow-list: publish only what the live page needs
+*
+!.gitignore
+!README.md
+!index.html
+!design.md
+!vendor/
+!vendor/*.js
+!vendor/*.css
+!img/
+!img/*.jpg
+!img/*.svg
+!frames/
+!frames/*.jpg
+!frames-m/
+!frames-m/*.jpg
+!loops/
+!loops/hero-web.mp4
+!loops/hero-web-sm.mp4
