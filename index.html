@@ -47,6 +47,8 @@ a{color:inherit;text-decoration:none}
 
 /* nav */
 nav{position:fixed;inset:0 0 auto;z-index:50;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;transition:background .4s,backdrop-filter .4s}
+nav .right .pill{transition:opacity .45s cubic-bezier(.33,1,.68,1),transform .4s var(--ease-out)}
+nav.cta-off .right .pill{opacity:0;visibility:hidden;pointer-events:none}
 nav.solid{background:rgba(251,248,244,.94);box-shadow:0 1px 0 var(--edge)}
 .logo{display:flex;align-items:center;gap:10px;font:560 15px/1 "Inter Tight",sans-serif;letter-spacing:.22em}
 .logo img{width:26px;height:26px}
@@ -182,22 +184,27 @@ html[data-motion=off] .eclipse-cta .copy>*{opacity:1;transform:none;filter:none;
 html[data-motion=off] .eclipse-cta .corona,html[data-motion=off] .eclipse-cta .halo{animation:none}
 
 /* 8 footer */
-footer{position:relative;overflow:hidden;min-height:clamp(680px,60vw,980px);background:var(--bg);padding:96px 24px 0;color:var(--mute);font-size:14px}
-footer .cols{position:relative;z-index:1;display:grid;grid-template-columns:2fr repeat(2,1fr);gap:32px;margin-bottom:56px}
-footer h3{margin:0 0 12px;color:var(--ink);font:480 13px Inter,sans-serif}
+
+footer .cols{display:grid;grid-template-columns:2fr repeat(2,1fr);gap:32px;margin-bottom:56px;padding-top:8px}
+footer h3{margin:0 0 12px;color:#fff;font:480 13px Inter,sans-serif}
 footer .cols a{display:block;margin:6px 0}
 footer .cols a.logo{display:flex;margin:0}
-footer .about .line{margin:22px 0 10px;font:500 clamp(26px,2.6vw,34px)/1.1 "Inter Tight",sans-serif;letter-spacing:-.03em;color:var(--ink)}footer .about .line span{color:#e8692c;white-space:nowrap}
+/* the scene fades in from the page; its meadow runs on into the deep green the footer text sits on */
+footer{--meadow:#17220f;--split:20vw;background:linear-gradient(var(--bg) var(--split),var(--meadow) var(--split));color:rgba(255,255,255,.78);font-size:14px;padding:0 24px 8px}
+footer .land{position:relative;margin:0 -24px}
+footer .land img{display:block;width:100%;height:auto;aspect-ratio:2400/1029;object-fit:cover;object-position:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 30%);mask-image:linear-gradient(transparent,#000 30%)}
+footer .land:after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(rgba(23,34,15,0),var(--meadow))}
+footer .cols a{color:rgba(255,255,255,.8)}footer .cols a:hover,footer .cols a.logo{color:#fff}
+@media (max-width:860px){footer{--split:60vw;padding:0 20px 8px}footer .land{margin:0 -20px}footer .land img{aspect-ratio:4/5}}
+footer .about .line{margin:22px 0 10px;font:500 clamp(26px,2.6vw,34px)/1.1 "Inter Tight",sans-serif;letter-spacing:-.03em;color:#fff}footer .about .line span{color:#ffb877;white-space:nowrap}
 footer .about p{margin:0;max-width:360px}
-footer .fine{border-top:1px solid var(--edge);padding-top:24px;font-size:13px;line-height:1.6}
-footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(20,20,28,.3)}
+footer .fine{border-top:1px solid rgba(255,255,255,.14);padding-top:24px;font-size:13px;line-height:1.6}
+footer .fine a{color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.35)}
 
 /* short laptop screens: smaller headline, cabin a little lower */
 @media (min-width:861px) and (max-height:820px){.hero .copy{padding-top:10vh}.hero h1{font-size:clamp(44px,4.6vw,64px)}}
 @media (max-width:860px){
   nav .links,nav .right .login{display:none}
-  nav .right .pill{transition:opacity .45s cubic-bezier(.33,1,.68,1)}
-  nav.cta-off .right .pill{opacity:0;pointer-events:none}
   .hero .copy{padding:11svh 20px 0}
   .hero h1{font-size:min(9.2vw,40px);line-height:1}
   .hero p{font-size:16px;margin:16px auto 26px}
@@ -222,7 +229,7 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
   .eclipse-cta .copy,.eclipse-cta .copy{max-width:100%;margin-top:36px}
   .eclipse-cta .copy h2{font-size:30px}
   footer .cols>div:first-child{grid-column:1/-1}
-  footer{min-height:900px;padding:56px 20px 0}
+
   footer .cols a{padding:12px 0;margin:0}
   .pill{height:44px}
   footer .cols a.logo{display:flex;padding:0}
@@ -297,17 +304,19 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
 .qs details p{margin:0 0 20px;color:var(--mute);max-width:560px}.qs details a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .qs summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:8px}
 /* footer landscape */
-footer .land{position:absolute;inset:0}
-footer .land img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 100%;-webkit-mask-image:linear-gradient(transparent 4%,#000 46%);mask-image:linear-gradient(transparent 4%,#000 46%)}
-footer .land .fine{position:absolute;left:0;right:0;bottom:0;padding-top:28px;padding-bottom:22px;color:rgba(255,255,255,.92);text-shadow:0 1px 10px rgba(0,0,0,.45)}
-footer .land .fine a{color:#fff}
-footer .land .fine{border-top:0}
+
+
+
+
+
 @media (max-width:860px){
   #app{padding-bottom:88px}.app,.faq{grid-template-columns:1fr;gap:32px;padding:0 20px}.faq{padding:16px 20px 88px}
   .app h2,.faq h2{font-size:28px}.appstage{min-height:400px;border-radius:22px}.tabs button{padding:12px 14px}
   .sky{min-height:72svh}.sky h2{font-size:44px}.sky p{font-size:16px;padding:0 8px}
-  footer .land img{-webkit-mask-image:linear-gradient(transparent 30%,#000 62%);mask-image:linear-gradient(transparent 30%,#000 62%)}
+  
 }
+html.lite *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.lite .eclipse-cta .corona,html.lite .eclipse-cta .halo,.eclipse-cta:not(.inview) .corona,.eclipse-cta:not(.inview) .halo{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.eclipse-cta .star{display:none}.eclipse-cta .ring,.eclipse-cta .copy>*{opacity:1;transition:none}.eclipse-cta .ring{transform:translate(-50%,-50%)}.eclipse-cta .copy>*{transform:none;filter:none}.hero .stage video{animation:none}}
 </style>
 </head>
@@ -323,7 +332,7 @@ footer .land .fine{border-top:0}
 <!-- 1 hero: Level 1 showpiece -->
 <header class="hero" id="top">
   <div class="stage" data-xray="Hero loop · Seedance 1.0 video, looped forwards and back in code" data-xray-tool="ai">
-    <video id="herovid" muted loop playsinline preload="auto" poster="img/hero-poster.jpg" aria-hidden="true">
+    <video id="herovid" muted loop playsinline preload="none" poster="img/hero-poster.jpg" aria-hidden="true">
       <source src="loops/hero-web-sm.mp4" type="video/mp4" media="(max-width: 860px)">
       <source src="loops/hero-web.mp4" type="video/mp4">
     </video>
@@ -455,13 +464,13 @@ footer .land .fine{border-top:0}
 </section>
 
 <footer>
+  <div class="land"><img src="img/land.jpg" srcset="img/land-m.jpg 1200w, img/land.jpg 2400w" sizes="100vw" alt="" loading="lazy" decoding="async"></div>
   <div class="cols wrap">
     <div class="about"><a class="logo" href="#top"><img src="img/sola-mark.svg" alt="">SOLA</a><p class="line">Get paid. <span>Sola does the rest.</span></p><p>A fictional bank for freelancers, designed and built by Deepanshu Labs.</p></div>
     <div><h3>Product</h3><a href="#how">Accounts</a><a href="#how">Taxes</a><a href="#cards">Cards</a></div>
     <div><h3>Deepanshu Labs</h3><a href="https://deepanshulathar.com/labs/">About</a><a href="https://wa.me/919999602901">WhatsApp</a><a href="mailto:deepanshulathar@gmail.com">Email</a></div>
   </div>
-  <div class="land"><img src="img/land.jpg" srcset="img/land-m.jpg 1200w, img/land.jpg 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
-    <div class="fine wrap">© 2026 Sola. A concept by <a href="https://deepanshulathar.com/labs/">Deepanshu Labs</a>.</div></div>
+  <div class="fine wrap">© 2026 Sola. A concept by <a href="https://deepanshulathar.com/labs/">Deepanshu Labs</a>.</div>
 </footer>
 
 <script src="vendor/engine.js"></script>
@@ -544,10 +553,13 @@ const PHONE = matchMedia('(max-width: 860px)').matches;  // cropped 4:5 frames f
   if (still()) ls.forEach((L, i) => { L.w.setAttribute('stroke-dashoffset', 0); L.bar.setAttribute('width', 100 * pots[i].share * 2); });
 })();
 
-new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('go'); o.disconnect(); } }), { threshold: .3 }).observe(document.querySelector('.eclipse-cta'));
+new IntersectionObserver((es) => es.forEach(e => { e.target.classList.toggle('inview', e.isIntersecting); if (e.isIntersecting) e.target.classList.add('go'); }), { threshold: .3 }).observe(document.querySelector('.eclipse-cta'));
 (() => { const v = document.getElementById('herovid'); if (matchMedia('(max-width: 860px)').matches) v.poster = 'img/hero-m.jpg';
-  const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const sync = (mode) => { if (rm || mode === 'off') v.pause(); else v.play().catch(() => {}); };
+  const rm = matchMedia('(prefers-reduced-motion: reduce)').matches, c = navigator.connection;
+  // data saver, a 2g/3g link or a weak device keeps the poster still and skips the video download
+  const lite = !!(c && (c.saveData || /2g|3g/.test(c.effectiveType || ''))) || (navigator.deviceMemory || 8) <= 2 || (navigator.hardwareConcurrency || 8) <= 2;
+  document.documentElement.classList.toggle('lite', lite);
+  const sync = (mode) => { if (rm || lite || mode === 'off') v.pause(); else v.play().catch(() => {}); };
   if (window.Motion) Motion.on(sync); else sync('on'); })();
 (() => { const nav = document.getElementById('nav'), seen = new Set();
   new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)); nav.classList.toggle('cta-off', seen.size > 0); }, { threshold: .15 })
