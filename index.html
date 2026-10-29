@@ -82,6 +82,8 @@ nav .right{display:flex;align-items:center;gap:18px;font-size:16px;font-weight:4
 .signup:focus-within{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(20,20,28,.14),0 0 0 5px rgba(82,102,235,.18),0 24px 60px -30px rgba(20,33,61,.45)}
 .signup input{flex:1;min-width:0;height:50px;border:0;background:transparent;color:var(--ink);padding:0 6px 0 22px;font:400 16px Inter,sans-serif;outline:none}
 .signup input::placeholder{color:#4a4d5c}
+/* browser autofill paints its own box; keep the glass and the ink colour instead */
+.signup input:-webkit-autofill,.signup input:-webkit-autofill:hover,.signup input:-webkit-autofill:focus{-webkit-text-fill-color:var(--ink);caret-color:var(--ink);-webkit-box-shadow:0 0 0 100px transparent inset;transition:background-color 9999s 0s}
 .signup .pill{height:50px;padding:0 26px;flex:none}
 .signup .trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .signup .done{position:absolute;inset:6px;display:flex;align-items:center;justify-content:center;margin:0;border-radius:999px;color:var(--ink);font-weight:480;font-size:16px;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .6s var(--ease-soft),transform .8s var(--ease-out)}
