@@ -171,6 +171,9 @@
         o.onProgress && o.onProgress(progress, current);
       }
     };
+    // pull every frame's bytes into the HTTP cache in film order, four at a time, so a fast scroll never waits on the network;
+    // decoded memory stays bounded by the windows above
+    if (o.prefetch) { let next = 0; const run = () => { if (disposed || next >= N) return; const i = next++; fetch(o.src(i), { priority: 'low' }).catch(() => {}).finally(run); }; for (let k = 0; k < 4; k++) run(); }
     addEventListener('resize', onResize);
     resize();
     pump();

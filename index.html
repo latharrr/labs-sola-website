@@ -71,16 +71,16 @@ nav .right{display:flex;align-items:center;gap:18px;font-size:16px;font-weight:4
 .hero h1 .l2{color:#e8692c}
 .hero p{max-width:540px;margin:18px auto 28px;color:#2f3140;font-size:19px;line-height:1.5}
 .signup{scroll-margin-top:30vh;position:relative;display:flex;align-items:center;gap:6px;width:min(500px,100%);margin:0 auto;padding:6px;border-radius:999px;
-  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.5));
+  background:linear-gradient(180deg,rgba(255,255,255,.46),rgba(255,255,255,.24));-webkit-backdrop-filter:blur(26px) saturate(185%);backdrop-filter:blur(26px) saturate(185%);
 
-  box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(20,20,28,.08),0 24px 60px -30px rgba(20,33,61,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.2),0 0 0 .5px rgba(255,255,255,.6),0 18px 44px -22px rgba(20,33,61,.35);
   transition:box-shadow .5s var(--ease-soft)}
 .signup:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
   background:linear-gradient(115deg,rgba(255,255,255,.72),rgba(255,255,255,.14) 30%,rgba(255,255,255,.04) 62%,rgba(255,200,155,.55));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
 .signup:focus-within{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(20,20,28,.14),0 0 0 5px rgba(82,102,235,.18),0 24px 60px -30px rgba(20,33,61,.45)}
 .signup input{flex:1;min-width:0;height:50px;border:0;background:transparent;color:var(--ink);padding:0 6px 0 22px;font:400 16px Inter,sans-serif;outline:none}
-.signup input::placeholder{color:#6b6e7e}
+.signup input::placeholder{color:#4a4d5c}
 .signup .pill{height:50px;padding:0 26px;flex:none}
 .signup .trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .signup .done{position:absolute;inset:6px;display:flex;align-items:center;justify-content:center;margin:0;border-radius:999px;color:var(--ink);font-weight:480;font-size:16px;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .6s var(--ease-soft),transform .8s var(--ease-out)}
@@ -254,7 +254,7 @@ footer .fine a{color:#fff;text-decoration:underline;text-underline-offset:3px;te
 .cardart{aspect-ratio:1.6;border-radius:16px;padding:18px;display:flex;justify-content:space-between;align-items:flex-start;color:#fff;font:600 13px/1 "Inter Tight",sans-serif;letter-spacing:.24em;background:radial-gradient(120% 120% at 100% 0%,#8f86ff 0%,transparent 50%),linear-gradient(135deg,#2c2f8f,#191a4d);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
 .cardart i{width:34px;height:26px;border-radius:6px;background:linear-gradient(135deg,#ffd7a8,#ffb877)}
 /* sky band */
-.sky{position:relative;aspect-ratio:2400/1029;min-height:440px;padding:0;margin:24px 0;display:grid;place-items:center;text-align:center;overflow:hidden;background:#f3dccf}
+.sky{position:relative;aspect-ratio:2400/1029;min-height:440px;padding:48px 0;box-sizing:border-box;margin:24px 0;display:grid;place-items:center;text-align:center;overflow:hidden;background:#f3dccf}
 .sky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 .sky:before,.sky:after{content:"";position:absolute;left:0;right:0;z-index:1;pointer-events:none}
 .sky:before{top:0;height:9%;background:linear-gradient(var(--bg),rgba(251,248,244,0))}
@@ -461,7 +461,7 @@ const PHONE = matchMedia('(max-width: 860px)').matches;  // cropped 4:5 frames f
     const count = PHONE ? 121 : 241, off = () => MotionEngine.reduced || !!(window.Motion && Motion.mode === 'off');
     const scrub = window.filmScrub = MotionEngine.Scrub({
       blend: true, lerp: 0.2, cover: true, dpr: PHONE ? 2 : 1, fps: 24, aheadSec: 0.75, behindSec: 0.5,
-      canvas: document.getElementById('filmc'), driver: film, count, frozen: off,
+      canvas: document.getElementById('filmc'), driver: film, count, frozen: off, prefetch: !document.documentElement.classList.contains('lite'),
       src: (i) => `${PHONE ? 'frames-m' : 'frames'}/f_${String(i + 1).padStart(4, '0')}.jpg`,
       onProgress: (p) => filmProgress(p)
     });

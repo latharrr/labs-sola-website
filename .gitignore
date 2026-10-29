@@ -20,3 +20,4 @@
 !img/logos/*.svg
 !api/
 !api/subscribe.mjs
+!vercel.json
