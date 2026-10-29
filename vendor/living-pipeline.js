@@ -73,35 +73,45 @@
     const io = (x) => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, out = (x) => 1 - Math.pow(1 - x, 3);
     const HOP = 1.3, LAND = .9, legs = wires.length, ROUND = .8 + legs * (HOP + LAND) + 1.6;
     let round = 0, lastRound = -1;
+    // frame() runs every display frame: write only values that changed, so parts at rest cost no style or paint work
+    const memo = new WeakMap(), lens = new WeakMap();
+    const fresh = (e, k, v) => { let m = memo.get(e); if (!m) memo.set(e, m = {}); if (m[k] === v) return false; m[k] = v; return true; };
+    const sa = (e, k, v) => { if (fresh(e, k, v)) e.setAttribute(k, v); };
+    const st = (e, v) => { if (fresh(e, 'transform', v)) e.style.transform = v; };
+    const len = (w) => { let L = lens.get(w); if (L == null) lens.set(w, L = w.getTotalLength()); return L; };
     function frame(t) {
       const r = Math.floor(t / ROUND), lt = t % ROUND;
       if (r !== lastRound) { lastRound = r; round = r; caption.textContent = cfg.rounds ? cfg.rounds[r % cfg.rounds.length] : ''; }
       let px = null, py = null;
-      cards.forEach(c => { c.ring.setAttribute('opacity', 0); });
+      cards.forEach(c => { sa(c.ring, 'opacity', 0); });
       for (let i = 0; i < legs; i++) {
         const s = .8 + i * (HOP + LAND), k = Math.max(0, Math.min(1, (lt - s) / HOP));
-        wires[i].setAttribute('stroke-dashoffset', 1 - io(k));
-        if (k > 0 && k < 1) { const p = wires[i].getPointAtLength(wires[i].getTotalLength() * io(k)); px = p.x; py = p.y; }
+        sa(wires[i], 'stroke-dashoffset', 1 - io(k));
+        if (k > 0 && k < 1) { const p = wires[i].getPointAtLength(len(wires[i]) * io(k)); px = p.x; py = p.y; }
         const land = lt - (s + HOP), c = cards[cfg.nodes.indexOf(byId[cfg.route[i + 1]])];
-        if (land >= 0 && land < .7) { const q = land / .7; c.ring.setAttribute('opacity', (1 - q) * .8); c.ring.setAttribute('transform', `scale(${1 + q * .18})`); c.g.style.transform = `scale(${1 + Math.sin(q * Math.PI) * .05})`; }
-        else if (land >= .7 || land < 0) c.g.style.transform = 'none';
+        if (land >= 0 && land < .7) { const q = land / .7; sa(c.ring, 'opacity', (1 - q) * .8); sa(c.ring, 'transform', `scale(${1 + q * .18})`); st(c.g, `scale(${1 + Math.sin(q * Math.PI) * .05})`); }
+        else if (land >= .7 || land < 0) st(c.g, 'none');
         const tk = Math.max(0, Math.min(1, (land - .25) / .5));
-        c.tickBg.setAttribute('opacity', out(tk)); c.tick.setAttribute('stroke-dashoffset', 1 - out(Math.max(0, tk * 1.3 - .3)));
+        sa(c.tickBg, 'opacity', out(tk)); sa(c.tick, 'stroke-dashoffset', 1 - out(Math.max(0, tk * 1.3 - .3)));
         if (land >= 0 && land < 0.02 && cfg.onArrive) cfg.onArrive(c.n, round, api);
       }
       const first = cards[cfg.nodes.indexOf(byId[cfg.route[0]])];
-      first.ring.setAttribute('opacity', lt < .8 ? (Math.sin(lt / .8 * Math.PI)) * .7 : 0);
-      packet.setAttribute('opacity', px == null ? 0 : 1); trail.setAttribute('opacity', px == null ? 0 : .18);
-      if (px != null) { packet.setAttribute('cx', px); packet.setAttribute('cy', py); trail.setAttribute('cx', px); trail.setAttribute('cy', py); }
-      caption.setAttribute('opacity', lt < .4 ? lt / .4 : lt > ROUND - .5 ? (ROUND - lt) / .5 : 1);
+      sa(first.ring, 'opacity', lt < .8 ? (Math.sin(lt / .8 * Math.PI)) * .7 : 0);
+      sa(packet, 'opacity', px == null ? 0 : 1); sa(trail, 'opacity', px == null ? 0 : .18);
+      if (px != null) { sa(packet, 'cx', px); sa(packet, 'cy', py); sa(trail, 'cx', px); sa(trail, 'cy', py); }
+      sa(caption, 'opacity', lt < .4 ? lt / .4 : lt > ROUND - .5 ? (ROUND - lt) / .5 : 1);
       // the round fades its wires and ticks back to empty in the last beat
-      if (lt > ROUND - .6) { const q = (lt - (ROUND - .6)) / .6; wires.forEach(w => w.setAttribute('stroke-opacity', 1 - q)); cards.forEach(c => { c.tickBg.setAttribute('opacity', 1 - q); }); }
-      else wires.forEach(w => w.setAttribute('stroke-opacity', 1));
+      if (lt > ROUND - .6) { const q = (lt - (ROUND - .6)) / .6; wires.forEach(w => sa(w, 'stroke-opacity', 1 - q)); cards.forEach(c => { sa(c.tickBg, 'opacity', 1 - q); }); }
+      else wires.forEach(w => sa(w, 'stroke-opacity', 1));
     }
     const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches || (window.Motion && window.Motion.mode === 'off');
-    let run = false, acc = 0, last = 0, built = false;
-    function loop(now) { if (!run) return; acc += Math.min(.05, (now - last) / 1000); last = now; frame(acc); requestAnimationFrame(loop); }
+    let run = false, acc = 0, last = 0, built = false, visible = false;
+    const rest = () => { run = false; cards.forEach(c => c.g.classList.add('in')); frame(ROUND - .7); };
+    function loop(now) { if (!run) return; if (still()) return rest(); acc += Math.min(.05, (now - last) / 1000); last = now; frame(acc); requestAnimationFrame(loop); }
+    // the switch can flip while the diagram is on screen: Off rests on the finished still, On resumes the clock where it was
+    if (window.Motion) window.Motion.on(() => { if (still()) rest(); else if (visible && built && !run) { run = true; last = performance.now(); requestAnimationFrame(loop); } });
     new IntersectionObserver(es => es.forEach(e => {
+      visible = e.isIntersecting;
       if (e.isIntersecting && !built) { built = true; cards.forEach(c => { c.g.classList.add('in'); c.g.style.transform = 'none'; }); }
       if (still()) { cards.forEach(c => c.g.classList.add('in')); frame(ROUND - .7); return; }
       if (e.isIntersecting && !run) { run = true; last = performance.now(); setTimeout(() => requestAnimationFrame(loop), built ? 0 : 900); }

@@ -23,13 +23,31 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.5 Inter,syst
 h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;font-weight:480;letter-spacing:-.03em;margin:0;text-wrap:balance}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1232px;margin:0 auto;padding:0 24px}
-.pill{display:inline-flex;align-items:center;height:40px;padding:0 20px;border-radius:999px;font:480 16px/1 Inter,sans-serif;background:linear-gradient(180deg,#6b7dff,#4a5de6);color:#fff;border:0;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.32),inset 0 -1px 0 rgba(0,0,0,.18),0 6px 16px -8px rgba(0,0,0,.55);transition:transform .4s var(--ease-out),filter .4s}
-@media (hover:hover){.pill:hover{transform:translateY(-1px);filter:brightness(1.08)}}
+.pill{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 18px 0 20px;border-radius:999px;font:520 15px/1 Inter,sans-serif;letter-spacing:-.01em;--pill-top:#fbf9f4;--pill-bot:#ece7dc;background:linear-gradient(180deg,var(--pill-top),var(--pill-bot));color:#11131b;border:0;cursor:pointer;box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(17,19,27,.08),0 0 0 1px rgba(255,255,255,.18),0 10px 28px -12px rgba(0,0,0,.6);transition:transform .4s var(--ease-out),box-shadow .4s var(--ease-out)}
+.pill:after{content:"→"/"";font-weight:400;transition:transform .4s var(--ease-out)}
+@media (hover:hover){.pill:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(17,19,27,.08),0 0 0 1px rgba(255,255,255,.3),0 14px 34px -12px rgba(0,0,0,.65)}.pill:hover:after{transform:translateX(3px)}}
+/* the nav button melts on hover: drips of the button's own colour run off its lower edge, merged by an SVG goo filter
+   that is applied only while hovered, so the button costs nothing at rest */
+.melt{position:relative;isolation:isolate;background:none}
+.melt .goo{position:absolute;inset:0 0 -56px;z-index:-1;pointer-events:none}
+.melt .goo b,.melt .goo i{position:absolute;background:var(--pill-bot)}
+.melt .goo b{inset:0 0 56px;border-radius:999px;background:linear-gradient(180deg,var(--pill-top),var(--pill-bot))}
+.melt .goo i{top:33px;width:12px;height:20px;border-radius:6px;transform:scaleY(0);transform-origin:top}
+.melt .goo i:nth-child(2){left:20%}.melt .goo i:nth-child(3){left:46%;width:15px}.melt .goo i:nth-child(4){left:71%;width:10px}
+.melt .goo i:nth-child(5){left:47%;width:9px;height:9px;border-radius:50%}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .melt:hover .goo,.melt:focus-visible .goo{filter:url(#goo)}
+  .melt:hover .goo i,.melt:focus-visible .goo i{animation:drip 2.4s cubic-bezier(.45,0,.2,1) infinite}
+  .melt:hover .goo i:nth-child(3),.melt:focus-visible .goo i:nth-child(3){animation-delay:.35s}
+  .melt:hover .goo i:nth-child(4),.melt:focus-visible .goo i:nth-child(4){animation-delay:.7s}
+  .melt:hover .goo i:nth-child(5),.melt:focus-visible .goo i:nth-child(5){animation:droplet 2.4s cubic-bezier(.5,0,.75,0) .35s infinite}}
+@keyframes drip{0%{transform:scaleY(0)}45%{transform:scaleY(1.9)}70%{transform:scaleY(1.45)}100%{transform:scaleY(0)}}
+@keyframes droplet{0%,40%{transform:translateY(0) scale(0)}55%{transform:translateY(22px) scale(1)}100%{transform:translateY(46px) scale(.6);opacity:0}}
 .pill.ghost{background:rgba(255,255,255,.16);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);backdrop-filter:blur(10px)}
 
 /* nav */
 nav{position:fixed;inset:0 0 auto;z-index:50;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;transition:background .4s,backdrop-filter .4s}
-nav.solid{background:rgba(21,24,33,.72);backdrop-filter:blur(16px) saturate(1.4)}
+nav.solid{background:rgba(17,19,27,.94)}
 .logo{display:flex;align-items:center;gap:10px;font:560 15px/1 "Inter Tight",sans-serif;letter-spacing:.22em}
 .logo img{width:26px;height:26px}
 nav .links{display:flex;gap:4px}
@@ -40,7 +58,7 @@ nav .right{display:flex;align-items:center;gap:18px;font-size:16px;font-weight:4
 /* 1 hero: the Level 1 showpiece, full bleed */
 .hero{position:relative;height:100vh;height:100svh;min-height:720px;overflow:hidden;background:radial-gradient(120% 70% at 50% 100%,#3a2a3a 0%,#1d1d2b 45%,var(--bg) 75%)}
 .hero .stage{position:absolute;inset:0;overflow:hidden}
-.hero .stage video{position:absolute;left:0;top:8svh;width:100%;height:132%;-webkit-mask-image:linear-gradient(transparent,#000 9%);mask-image:linear-gradient(transparent,#000 9%);object-fit:cover;object-position:60% 50%;transform-origin:62% 60%;animation:drift 26s ease-in-out infinite alternate}
+.hero .stage video{position:absolute;left:0;top:14svh;width:100%;height:122%;-webkit-mask-image:linear-gradient(transparent,#000 9%);mask-image:linear-gradient(transparent,#000 9%);object-fit:cover;object-position:50% 50%;transform-origin:50% 60%;animation:drift 26s ease-in-out infinite alternate}
 @keyframes drift{to{transform:scale(1.06) translateY(-1%)}}
 .hero .stage:after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(14,17,26,.62) 0%,rgba(14,17,26,.34) 34%,rgba(14,17,26,0) 56%,rgba(21,24,33,0) 74%,var(--bg) 100%)}
 .hero .copy{position:relative;z-index:2;text-align:center;padding-top:12vh}
@@ -50,9 +68,9 @@ nav .right{display:flex;align-items:center;gap:18px;font-size:16px;font-weight:4
 .hero h1 span{display:block}
 .hero h1 .l2{color:#ffbe8a}
 .hero p{max-width:540px;margin:18px auto 28px;color:#e2e3ec;font-size:19px;line-height:1.5}
-.signup{position:relative;display:flex;align-items:center;gap:6px;width:min(500px,100%);margin:0 auto;padding:6px;border-radius:999px;
+.signup{scroll-margin-top:30vh;position:relative;display:flex;align-items:center;gap:6px;width:min(500px,100%);margin:0 auto;padding:6px;border-radius:999px;
   background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.06));
-  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -1px 1px rgba(255,255,255,.07),0 28px 70px -28px rgba(4,6,14,.75);
   transition:box-shadow .5s var(--ease-soft)}
 .signup:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
@@ -70,19 +88,25 @@ nav .right{display:flex;align-items:center;gap:18px;font-size:16px;font-weight:4
 .signup.busy .pill{opacity:.7;cursor:progress}
 .formnote{min-height:22px;margin:12px 0 0;font-size:14px;font-weight:500;color:#fff;text-shadow:0 1px 12px rgba(8,10,18,.75)}
 .formnote.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-.hero .more{display:inline-flex;align-items:center;gap:8px;margin-top:20px;min-height:44px;color:#eef0f8;font-size:15px;font-weight:450;text-shadow:0 1px 16px rgba(8,10,18,.5)}
+.hero .more{display:inline-flex;align-items:center;gap:8px;margin-top:2px;min-height:44px;color:#fff;font-size:15px;font-weight:500;text-shadow:0 1px 2px rgba(8,10,18,.45),0 1px 18px rgba(8,10,18,.7)}
 .hero .more span{transition:transform .45s var(--ease-out)}
 @media (hover:hover){.hero .more:hover span{transform:translateX(4px)}}
 
 /* 2 built-for strip */
 .strip{padding:72px 0 48px;text-align:center}
 .strip h2{font-size:clamp(28px,3vw,42px);line-height:1.15;max-width:760px;margin:0 auto 40px}
-.marquee{overflow:hidden;mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.marquee .row{display:flex;width:max-content;animation:mq 46s linear infinite}
-.logo-item{display:flex;align-items:center;gap:12px;padding:0 38px;color:#c8cad8;font:520 22px/1 "Inter Tight",sans-serif;letter-spacing:-.02em;white-space:nowrap}
-.logo-item img{width:26px;height:26px;filter:invert(1);opacity:.88}
-@keyframes mq{to{transform:translateX(-50%)}}
-html[data-motion=off] .marquee .row,html[data-motion=off] .hero .stage video{animation:none}
+.brands{list-style:none;margin:0 auto;padding:0 24px;max-width:1180px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;--x:-999px;--y:-999px}
+.brands li{--x:-999px;--y:-999px;--lit:0;position:relative;height:150px;display:flex;align-items:center;justify-content:center;gap:14px;border-radius:22px;translate:0 var(--ty,0px);background:radial-gradient(120% 100% at 50% 115%,color-mix(in srgb,var(--c) calc(var(--lit) * 34%),transparent),transparent 70%),rgba(255,255,255,.025);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) calc(var(--lit) * 45%),rgba(255,255,255,.07));color:color-mix(in srgb,#fff calc(var(--lit) * 100%),#c8cad8);font:520 26px/1 "Inter Tight",sans-serif;letter-spacing:-.02em;overflow:hidden;isolation:isolate;transition:transform .6s var(--ease-out)}
+.brands li i{width:40px;height:40px;flex:none;background:color-mix(in srgb,var(--c) calc(var(--lit) * 100%),#c8cad8);-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;transition:background-color .25s}
+/* the cursor carries a soft light: it rims every tile it is near and washes the one under it in that brand's colour */
+.brands li:before,.brands li:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1}
+.brands li:before{padding:1px;background:radial-gradient(240px circle at var(--x) var(--y),rgba(255,255,255,.38),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.brands li:after{background:radial-gradient(260px circle at var(--x) var(--y),color-mix(in srgb,var(--c) 26%,transparent),transparent 72%);opacity:0;transition:opacity .5s var(--ease-soft)}
+.brands li:hover,.brands li:active{color:#fff}.brands li:hover i,.brands li:active i{background-color:var(--c)}.brands li:hover:after,.brands li:active:after{opacity:1}
+@media (hover:hover){.brands li:hover{transform:translateY(-3px)}}
+
+html[data-motion=off] .hero .stage video{animation:none}
+html[data-motion=off] [data-wordlight] .w{color:var(--ink)}html[data-motion=off] [data-wordlight] .w.hi{color:#ffb877}
 
 /* 3 statement, word light */
 #say{height:240vh}
@@ -161,14 +185,14 @@ html[data-motion=off] .eclipse-cta .corona,html[data-motion=off] .eclipse-cta .h
 /* 8 footer */
 footer{background:var(--bg2);padding:80px 24px 120px;color:var(--mute);font-size:14px}
 footer .cols{display:grid;grid-template-columns:2fr repeat(2,1fr);gap:32px;margin-bottom:56px}
-footer h4{margin:0 0 12px;color:var(--ink);font:480 13px Inter,sans-serif}
+footer h3{margin:0 0 12px;color:var(--ink);font:480 13px Inter,sans-serif}
 footer .cols a{display:block;margin:6px 0}
 footer .cols a.logo{display:flex;margin:0}
 footer .fine{border-top:1px solid var(--edge);padding-top:24px;font-size:13px;line-height:1.6}
 footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}
 
 /* short laptop screens: smaller headline, cabin a little lower */
-@media (min-width:861px) and (max-height:820px){.hero .copy{padding-top:10vh}.hero h1{font-size:clamp(44px,4.6vw,64px)}.hero .stage video{height:142%}}
+@media (min-width:861px) and (max-height:820px){.hero .copy{padding-top:10vh}.hero h1{font-size:clamp(44px,4.6vw,64px)}.hero .stage video{top:22svh;height:116%}}
 @media (max-width:860px){
   nav .links,nav .right .login{display:none}
   nav .right .pill{transition:opacity .45s cubic-bezier(.33,1,.68,1)}
@@ -177,7 +201,7 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
   .hero h1{font-size:min(9.2vw,40px);line-height:1}
   .hero p{font-size:16px;margin:16px auto 26px}
   .signup{width:100%;max-width:360px}.signup input{padding-left:18px}.signup .pill{padding:0 18px;font-size:15px}
-  .logo-item{font-size:19px;padding:0 26px}.logo-item img{width:22px;height:22px}
+  .brands{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 20px}.brands li{height:96px;gap:10px;font-size:19px;border-radius:18px}.brands li i{width:28px;height:28px}
   .strip{padding:56px 0 32px}.strip h2{font-size:28px;margin-bottom:28px}
   #say{height:auto}[data-wordlight] .w{color:var(--ink)}[data-wordlight] .w.hi{color:#ffb877}#say .pin{position:static;height:auto;padding:24px 20px 72px}#say p{font-size:31px}
   .strip{padding-bottom:16px}
@@ -214,21 +238,93 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
   #flow text{font-size:38px}
   footer .cols{grid-template-columns:1fr 1fr}
 }
-@media (prefers-reduced-motion:reduce){.eclipse-cta .star{display:none}.eclipse-cta .ring,.eclipse-cta .copy>*{opacity:1;transition:none}.eclipse-cta .ring{transform:translate(-50%,-50%)}.eclipse-cta .copy>*{transform:none;filter:none}.marquee .row,.hero .stage video{animation:none}}
+/* the app: tabs on the left, a soft stage of concept screens on the right */
+#app{padding:0 0 140px}
+.app{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:center;padding:0 24px}
+.tag{display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:500;background:rgba(20,20,28,.06);color:var(--mute-l)}
+.tag:before{content:"";width:6px;height:6px;border-radius:50%;background:#ff8a4c}
+.app h2{font-size:clamp(28px,3vw,42px);line-height:1.15;margin:16px 0 12px}
+.app-copy>p{color:var(--mute-l);margin:0 0 28px;max-width:420px}
+.tabs{display:grid;gap:6px}
+.tabs button{all:unset;cursor:pointer;display:block;padding:14px 18px;border-radius:16px;transition:background .5s var(--ease-soft)}
+.tabs button b{display:block;font-weight:500;font-size:16px;color:var(--ink-l)}
+.tabs button span{display:block;color:var(--mute-l);font-size:15px;margin-top:2px}
+.tabs button[aria-selected=false] b{color:var(--mute-l)}
+.tabs button[aria-selected=true]{background:#fff;box-shadow:0 1px 0 rgba(20,20,28,.04),0 12px 32px -18px rgba(20,33,61,.35)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (hover:hover){.tabs button[aria-selected=false]:hover{background:rgba(20,20,28,.04)}}
+.appstage{position:relative;margin:0;min-height:460px;padding:40px 0 60px;border-radius:28px;background:radial-gradient(120% 90% at 80% 0%,#ffe2cf 0%,transparent 55%),radial-gradient(90% 80% at 0% 100%,#e4dcff 0%,transparent 60%),#efe9e3;display:grid;place-items:center;overflow:hidden}
+.appstage figcaption{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-size:12px;color:var(--mute-l)}
+.panel{grid-area:1/1;width:min(360px,86%);opacity:0;transform:translateY(14px) scale(.98);transition:opacity .6s var(--ease-soft),transform .8s var(--ease-out)}
+.panel.on{opacity:1;transform:none}
+.ui{background:#fff;color:var(--ink-l);border-radius:22px;padding:22px;box-shadow:0 1px 0 rgba(20,20,28,.04),0 30px 60px -30px rgba(20,33,61,.45);display:grid;gap:12px}
+.ui small{color:var(--mute-l);font-size:13px}.ui em{font-style:normal;color:var(--mute-l);font-size:13px;margin-top:-8px}
+.ui .big{font:500 34px/1.1 "Inter Tight",sans-serif;letter-spacing:-.03em}
+.ui .row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}
+.ui .row.soft{color:var(--mute-l)}.ui .row.line{padding:12px 0;border-top:1px solid rgba(20,20,28,.08)}
+.ui .row b{font-weight:500}.ui .row b.mute{color:var(--mute-l)}.ui .row b.on{color:#22a06b}
+.chip{justify-self:start;font-size:12px;font-weight:500;padding:5px 10px;border-radius:999px;background:#e7f6ee;color:#167a50}
+.pots{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:12px}
+.pots li{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:14px}
+.pots li i{grid-column:1/-1;height:8px;border-radius:8px;background:rgba(20,20,28,.06);position:relative;overflow:hidden}
+.pots li i:after{content:"";position:absolute;inset:0;width:var(--w);border-radius:inherit;background:var(--c);transform-origin:left;transform:scaleX(0);transition:transform 1.1s var(--ease-out)}
+.panel.on .pots li i:after{transform:none}.panel.on .pots li:nth-child(2) i:after{transition-delay:.12s}.panel.on .pots li:nth-child(3) i:after{transition-delay:.24s}
+.fx{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:14px;background:#f4f1ec;font-size:14px}.fx b{font-weight:600;font-size:18px}
+.meter{height:10px;border-radius:10px;background:rgba(20,20,28,.06);overflow:hidden}.meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#ffb877,#ff8a4c);transform-origin:left;transform:scaleX(0);transition:transform 1.2s var(--ease-out)}
+.panel.on .meter i{transform:none}
+.cardart{aspect-ratio:1.6;border-radius:16px;padding:18px;display:flex;justify-content:space-between;align-items:flex-start;color:#fff;font:600 13px/1 "Inter Tight",sans-serif;letter-spacing:.24em;background:radial-gradient(120% 120% at 100% 0%,#8f86ff 0%,transparent 50%),linear-gradient(135deg,#2c2f8f,#191a4d);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.cardart i{width:34px;height:26px;border-radius:6px;background:linear-gradient(135deg,#ffd7a8,#ffb877)}
+/* sky band */
+.sky{position:relative;min-height:min(86vh,820px);display:grid;place-items:center;text-align:center;overflow:hidden;background:#f3dccf}
+.sky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sky:before,.sky:after{content:"";position:absolute;left:0;right:0;z-index:1;pointer-events:none}
+.sky:before{top:0;height:30%;background:linear-gradient(var(--cream),rgba(248,244,241,0))}
+.sky:after{bottom:0;height:42%;background:linear-gradient(rgba(21,24,33,0),var(--bg))}
+.sky-copy{position:relative;z-index:2;color:var(--ink-l);padding:0 24px;margin-top:-6vh}
+.sky-copy .tag{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.sky h2{font:500 clamp(40px,6vw,84px)/1.02 "Inter Tight",sans-serif;letter-spacing:-.035em;margin:18px 0 14px}
+.sky p{margin:0 auto;max-width:460px;color:#3b3550;font-size:18px}
+/* questions */
+.faq{padding:40px 24px 120px;display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:start}
+.faq h2{font-size:clamp(28px,3vw,42px);line-height:1.15;margin:0}
+.qs{border-top:1px solid var(--edge)}
+.qs details{border-bottom:1px solid var(--edge)}
+.qs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:44px;padding:18px 0;font-size:17px;font-weight:480}
+.qs summary::-webkit-details-marker{display:none}
+.qs summary:after{content:"+";flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.06);font-weight:400;font-size:20px;transition:transform .5s var(--ease-out),background .4s}
+.qs details[open] summary:after{transform:rotate(45deg);background:rgba(255,184,119,.2)}
+.qs details p{margin:0 0 20px;color:var(--mute);max-width:560px}.qs details a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.qs summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:8px}
+/* footer landscape */
+footer .land{position:relative;margin:24px -24px -120px}
+footer .land img{display:block;width:100%;height:clamp(240px,34vw,560px);object-fit:cover;object-position:50% 70%;-webkit-mask-image:linear-gradient(transparent,#000 28%);mask-image:linear-gradient(transparent,#000 28%)}
+footer .land .fine{position:absolute;left:0;right:0;bottom:0;padding-top:28px;padding-bottom:22px;color:rgba(255,255,255,.92);text-shadow:0 1px 10px rgba(0,0,0,.45)}
+footer .land .fine a{color:#fff}
+footer .land .fine{border-top:0}
+/* on laptops the app section pins and scroll walks through the four screens */
+@media (min-width:861px) and (min-height:600px){#app{height:320vh;padding:0}#app .app{position:sticky;top:0;height:100vh;height:100svh;align-content:center;padding-top:40px}}
+@media (max-width:860px){
+  #app{padding-bottom:88px}.app,.faq{grid-template-columns:1fr;gap:32px;padding:0 20px}.faq{padding:16px 20px 88px}
+  .app h2,.faq h2{font-size:28px}.appstage{min-height:400px;border-radius:22px}.tabs button{padding:12px 14px}
+  .sky{min-height:72svh}.sky h2{font-size:44px}.sky p{font-size:16px;padding:0 8px}
+  footer .land{margin:24px -20px -40px}footer .land img{height:280px}
+}
+@media (prefers-reduced-motion:reduce){.eclipse-cta .star{display:none}.eclipse-cta .ring,.eclipse-cta .copy>*{opacity:1;transition:none}.eclipse-cta .ring{transform:translate(-50%,-50%)}.eclipse-cta .copy>*{transform:none;filter:none}.hero .stage video{animation:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="goo" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter></svg>
 
 <nav id="nav">
-  <a class="logo" href="#"><img src="img/sola-mark.svg" alt="">SOLA</a>
-  <div class="links"><a href="#how">Accounts</a><a href="#how">Taxes</a><a href="#cards">Cards</a><a href="#close">Pricing</a></div>
-  <div class="right"><a class="login" href="#">Log in</a><a class="pill" href="#close">Open account</a></div>
+  <a class="logo" href="#top"><img src="img/sola-mark.svg" alt="">SOLA</a>
+  <div class="links"><a href="#film">The film</a><a href="#how">How it works</a><a href="#cards">Cards</a></div>
+  <div class="right"><a class="pill melt" href="#signup"><span class="goo" aria-hidden="true"><b></b><i></i><i></i><i></i><i></i></span>Get the story</a></div>
 </nav>
 
 <!-- 1 hero: Level 1 showpiece -->
 <header class="hero" id="top">
-  <div class="stage" data-xray="Living still · Seedance 1.0 on ModelArk, ping-pong loop" data-xray-tool="higgsfield">
-    <video id="herovid" muted loop playsinline preload="auto" poster="img/hero.jpg" aria-hidden="true">
+  <div class="stage" data-xray="Hero loop · Seedance 1.0 video, looped forwards and back in code" data-xray-tool="ai">
+    <video id="herovid" muted loop playsinline preload="auto" poster="img/hero-poster.jpg" aria-hidden="true">
       <source src="loops/hero-web-sm.mp4" type="video/mp4" media="(max-width: 860px)">
       <source src="loops/hero-web.mp4" type="video/mp4">
     </video>
@@ -237,10 +333,10 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
     <h1 class="rise"><span class="l1">Get paid.</span><span class="l2">Sola does the rest.</span></h1>
     <p class="rise" style="--d:.1s">The bank account for freelancers that sets aside tax and savings the moment money lands.</p>
     <form class="signup rise" style="--d:.2s" id="signup" novalidate>
-      <input type="email" name="email" placeholder="Enter your email" aria-label="Email" autocomplete="email" required>
+      <input type="email" name="email" placeholder="Your email" aria-label="Email" autocomplete="email" required>
       <input class="trap" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button class="pill" type="submit">Open account</button>
-      <p class="done" aria-hidden="true">Check your inbox. Deepanshu will be in touch.</p>
+      <button class="pill" type="submit">Send me the story</button>
+      <p class="done" aria-hidden="true">Sent. The details are on their way to your inbox.</p>
     </form>
     <p class="formnote" id="formnote" role="status" aria-live="polite"></p>
     <a class="more rise" style="--d:.3s" href="#how">See how it works <span aria-hidden="true">→</span></a>
@@ -250,10 +346,9 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
 <!-- 2 built for -->
 <section class="strip">
   <h2 class="rise wrap">Get paid from anywhere you already work.</h2>
-  <div class="marquee" role="img" aria-label="Upwork, Fiverr, Stripe, PayPal, Wise, Payoneer, Gumroad and Toptal"><div class="row">
-    <span class="logo-item"><img src="img/logos/upwork.svg" alt="">Upwork</span><span class="logo-item"><img src="img/logos/fiverr.svg" alt="">Fiverr</span><span class="logo-item"><img src="img/logos/stripe.svg" alt="">Stripe</span><span class="logo-item"><img src="img/logos/paypal.svg" alt="">PayPal</span><span class="logo-item"><img src="img/logos/wise.svg" alt="">Wise</span><span class="logo-item"><img src="img/logos/payoneer.svg" alt="">Payoneer</span><span class="logo-item"><img src="img/logos/gumroad.svg" alt="">Gumroad</span><span class="logo-item"><img src="img/logos/toptal.svg" alt="">Toptal</span>
-    <span class="logo-item"><img src="img/logos/upwork.svg" alt="">Upwork</span><span class="logo-item"><img src="img/logos/fiverr.svg" alt="">Fiverr</span><span class="logo-item"><img src="img/logos/stripe.svg" alt="">Stripe</span><span class="logo-item"><img src="img/logos/paypal.svg" alt="">PayPal</span><span class="logo-item"><img src="img/logos/wise.svg" alt="">Wise</span><span class="logo-item"><img src="img/logos/payoneer.svg" alt="">Payoneer</span><span class="logo-item"><img src="img/logos/gumroad.svg" alt="">Gumroad</span><span class="logo-item"><img src="img/logos/toptal.svg" alt="">Toptal</span>
-  </div></div>
+  <ul class="brands" aria-label="Upwork, Fiverr, Stripe, PayPal, Wise, Payoneer, Gumroad and Toptal">
+    <li style="--c:#14a800;--m:url(img/logos/upwork.svg);--i:0"><i></i>Upwork</li><li style="--c:#1dbf73;--m:url(img/logos/fiverr.svg);--i:1"><i></i>Fiverr</li><li style="--c:#7a73ff;--m:url(img/logos/stripe.svg);--i:2"><i></i>Stripe</li><li style="--c:#009cde;--m:url(img/logos/paypal.svg);--i:3"><i></i>PayPal</li><li style="--c:#9fe870;--m:url(img/logos/wise.svg);--i:4"><i></i>Wise</li><li style="--c:#ff4800;--m:url(img/logos/payoneer.svg);--i:5"><i></i>Payoneer</li><li style="--c:#ff90e8;--m:url(img/logos/gumroad.svg);--i:6"><i></i>Gumroad</li><li style="--c:#5b8def;--m:url(img/logos/toptal.svg);--i:7"><i></i>Toptal</li>
+  </ul>
 </section>
 
 <!-- 3 statement -->
@@ -270,7 +365,7 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
       <div class="cap"><h2>Already sorted.</h2><p>Tax, savings and spend, split the second it lands.</p></div>
       <div class="steps"><i><b></b></i><i><b></b></i><i><b></b></i></div>
     </div>
-    <div class="screen" data-xray="Scroll film · Seedance 2.0 on ModelArk" data-xray-tool="higgsfield"><canvas id="filmc"></canvas></div>
+    <div class="screen" data-xray="Scroll film · Seedream keyframes and Seedance 1.0 clips, scrubbed by scroll" data-xray-tool="ai"><canvas id="filmc"></canvas></div>
   </div>
 </section>
 
@@ -285,20 +380,71 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
         <li class="rise"><b>Savings that build</b><span>A slice of every invoice goes somewhere you will not touch.</span></li>
         <li class="rise"><b>Spend what is left</b><span>Your card only sees money that is really yours.</span></li>
       </ol>
-      <a class="link rise" href="#close">Try the demo</a>
+      <a class="link rise" href="#signup">Get the story</a>
     </div>
     <div id="flow" data-xray="Payment split · code, SVG" data-xray-tool="code"></div>
   </div>
 </section>
-<div class="fade-out"></div>
+<!-- 5b the app: four features, each with its own concept screen -->
+<section class="light" id="app">
+  <div class="app wrap">
+    <div class="app-copy">
+      <span class="tag rise">The app</span>
+      <h2 class="rise">Everything in its place.</h2>
+      <p class="rise">One account, three pots and a calm view of what is really yours.</p>
+      <div class="tabs rise" role="tablist" aria-label="Sola features">
+        <button role="tab" id="t-pots" aria-controls="p-pots" aria-selected="true"><b>Pots that fill themselves</b><span>Tax, savings and spend, split the second money lands.</span></button>
+        <button role="tab" id="t-inv" aria-controls="p-inv" aria-selected="false" tabindex="-1"><b>Invoices in any currency</b><span>Bill in theirs. Get paid in yours.</span></button>
+        <button role="tab" id="t-tax" aria-controls="p-tax" aria-selected="false" tabindex="-1"><b>Tax dates you cannot miss</b><span>The money is waiting before the bill arrives.</span></button>
+        <button role="tab" id="t-card" aria-controls="p-card" aria-selected="false" tabindex="-1"><b>A card with rules</b><span>It only ever spends from the Spend pot.</span></button>
+      </div>
+    </div>
+    <figure class="appstage rise">
+      <div class="panel on" role="tabpanel" id="p-pots" aria-labelledby="t-pots">
+        <div class="ui"><small>Payment received</small><strong class="big">$2,400.00</strong><em>Studio North · just now</em>
+          <ul class="pots"><li style="--c:#ff8a4c;--w:25%"><span>Tax</span><b>$600</b><i></i></li><li style="--c:#5266eb;--w:10%"><span>Savings</span><b>$240</b><i></i></li><li style="--c:#22a06b;--w:65%"><span>Spend</span><b>$1,560</b><i></i></li></ul></div>
+      </div>
+      <div class="panel" role="tabpanel" id="p-inv" aria-labelledby="t-inv" inert>
+        <div class="ui"><div class="row"><small>Invoice 0142</small><span class="chip">Paid</span></div><strong class="big">€1,800.00</strong>
+          <div class="fx"><span>You receive</span><b>$1,948.20</b></div><div class="row soft"><span>Studio North, Berlin</span><span>Paid 2 Nov</span></div></div>
+      </div>
+      <div class="panel" role="tabpanel" id="p-tax" aria-labelledby="t-tax" inert>
+        <div class="ui"><small>Next tax payment</small><strong class="big">15 January</strong>
+          <div class="meter"><i></i></div><div class="row soft"><span>Set aside</span><span>$3,120 of $3,120</span></div><span class="chip ok">Ready before the due date</span></div>
+      </div>
+      <div class="panel" role="tabpanel" id="p-card" aria-labelledby="t-card" inert>
+        <div class="ui"><div class="cardart"><span>SOLA</span><i></i></div>
+          <div class="row line"><span>Spends from</span><b>Spend pot</b></div><div class="row line"><span>Tax pot</span><b class="mute">Locked</b></div><div class="row line"><span>Online payments</span><b class="on">On</b></div></div>
+      </div>
+      <figcaption>Concept screens. Example amounts.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 5c a breath of sky between the light and dark worlds -->
+<section class="sky" aria-labelledby="sky-h">
+  <img src="img/sky.jpg" srcset="img/sky-m.jpg 1200w, img/sky.jpg 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  <div class="sky-copy wrap"><span class="tag rise">Made for freelancers</span><h2 class="rise" id="sky-h">Your money, finally calm.</h2><p class="rise">No spreadsheets. No guessing. Every payment lands already sorted.</p></div>
+</section>
 
 <!-- 6 three cards: Level 2 stills -->
 <section class="cards wrap" id="cards">
   <h2 class="rise">Built for the way you actually get paid.</h2>
   <div class="grid" data-stagger>
-    <article class="card rise"><div class="media" data-xray="Still · Seedream on ModelArk" data-xray-tool="higgsfield"><img src="img/c1.jpg" alt="Passport, map and coffee on a desk at dawn" loading="lazy"></div><h3>Paid from anywhere</h3><p>Send an invoice in your client's currency and get it in yours.</p></article>
-    <article class="card rise"><div class="media" data-xray="Still · Seedream on ModelArk" data-xray-tool="higgsfield"><img src="img/c2.jpg" alt="A stack of envelopes held by a wooden clip" loading="lazy"></div><h3>Tax, handled quietly</h3><p>When the bill comes, the money is already waiting.</p></article>
-    <article class="card rise"><div class="media" data-xray="Still · Seedream on ModelArk" data-xray-tool="higgsfield"><img src="img/c3.jpg" alt="A blank indigo card beside a laptop" loading="lazy"></div><h3>A card with good sense</h3><p>It spends from what is left, never from the tax pot.</p></article>
+    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c1.jpg" alt="A passport, a map and coffee on a sunny desk by the sea" loading="lazy"></div><h3>Paid from anywhere</h3><p>Send an invoice in your client's currency and get it in yours.</p></article>
+    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c2.jpg" alt="Envelopes held by a wooden clip beside a sprig of lavender" loading="lazy"></div><h3>Tax, handled quietly</h3><p>When the bill comes, the money is already waiting.</p></article>
+    <article class="card rise"><div class="media" data-xray="Card still · Seedream 5.0 image" data-xray-tool="ai"><img src="img/c3.jpg" alt="An indigo card beside a laptop at sunset" loading="lazy"></div><h3>A card with good sense</h3><p>It spends from what is left, never from the tax pot.</p></article>
+  </div>
+</section>
+
+<!-- 6b questions -->
+<section class="faq wrap" id="faq">
+  <h2 class="rise">Questions, answered.</h2>
+  <div class="qs" data-stagger>
+    <details class="rise"><summary>Is Sola a real bank?</summary><p>No. Sola is a fictional banking concept designed by Deepanshu Labs to show how a bank for freelancers could feel. It is not a bank and no accounts are opened.</p></details>
+    <details class="rise"><summary>What happens when I enter my email?</summary><p>You get one email about this concept and how it was made. Your address is shared with Deepanshu so he can reply. Nothing else is sent.</p></details>
+    <details class="rise"><summary>How would the money get split?</summary><p>You pick a tax rate and a savings slice once. Every payment is then split into Tax, Savings and Spend the moment it lands, and the card only spends from Spend.</p></details>
+    <details class="rise"><summary>Can I get a website like this?</summary><p>Yes. Deepanshu Labs builds websites and AI products. Say hello on <a href="https://wa.me/919999602901">WhatsApp</a> or by <a href="mailto:deepanshulathar@gmail.com">email</a>.</p></details>
   </div>
 </section>
 
@@ -306,16 +452,17 @@ footer .fine a{color:var(--ink);text-decoration:underline;text-underline-offset:
 <section class="eclipse-cta" id="close">
   <div class="star"><i></i><i></i><b></b></div>
   <div class="ring" data-xray="Eclipse · code, CSS" data-xray-tool="code"><div class="halo"></div><div class="corona"></div><div class="disc"></div></div>
-  <div class="copy"><h2>Money that sorts itself.</h2><p>Open an account between clients. It takes a few minutes.</p><a class="pill" href="#top">Open account</a></div>
+  <div class="copy"><h2>Money that sorts itself.</h2><p>Sola is a concept by Deepanshu Labs. Leave your email and get the story behind it.</p><a class="pill" href="#signup">Get the story</a></div>
 </section>
 
 <footer>
   <div class="cols wrap">
-    <div><a class="logo" href="#"><img src="img/sola-mark.svg" alt="">SOLA</a></div>
-    <div><h4>Product</h4><a href="#how">Accounts</a><a href="#how">Taxes</a><a href="#cards">Cards</a></div>
-    <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a></div>
+    <div><a class="logo" href="#top"><img src="img/sola-mark.svg" alt="">SOLA</a></div>
+    <div><h3>Product</h3><a href="#how">Accounts</a><a href="#how">Taxes</a><a href="#cards">Cards</a></div>
+    <div><h3>Deepanshu Labs</h3><a href="https://deepanshulathar.com/labs/">About</a><a href="https://wa.me/919999602901">WhatsApp</a><a href="mailto:deepanshulathar@gmail.com">Email</a></div>
   </div>
-  <div class="fine wrap">© 2026 Sola. A concept by <a href="https://deepanshulathar.com/labs/">Deepanshu Labs</a>.</div>
+  <div class="land"><img src="img/land.jpg" srcset="img/land-m.jpg 1200w, img/land.jpg 2400w" sizes="100vw" alt="" loading="lazy" decoding="async">
+    <div class="fine wrap">© 2026 Sola. A concept by <a href="https://deepanshulathar.com/labs/">Deepanshu Labs</a>.</div></div>
 </footer>
 
 <script src="vendor/engine.js"></script>
@@ -336,12 +483,17 @@ const PHONE = matchMedia('(max-width: 860px)').matches;  // cropped 4:5 frames f
   if (!window.FILM_FRAMES) { let q = false; const t = () => { q = false; const r = film.getBoundingClientRect(); filmProgress(Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)))); };
     addEventListener('scroll', () => { if (!q) { q = true; requestAnimationFrame(t); } }, { passive: true }); t(); }
   // frames stream only once the film is near, so the hero loads first
-  else new IntersectionObserver((es, o) => { if (!es[0].isIntersecting) return; o.disconnect(); MotionEngine.Scrub({
-    blend: true, lerp: 0.09, cover: true, dpr: 2, fps: 24,
-    canvas: document.getElementById('filmc'), driver: film, count: PHONE ? 114 : 228,
-    src: (i) => `${PHONE ? 'frames-m' : 'frames'}/f_${String(i + 1).padStart(4, '0')}.jpg`,
-    onProgress: (p) => filmProgress(p)
-  }); }, { rootMargin: '1500px 0px' }).observe(film);
+  else new IntersectionObserver((es, o) => { if (!es[0].isIntersecting) return; o.disconnect();
+    const count = PHONE ? 114 : 228, off = () => MotionEngine.reduced || !!(window.Motion && Motion.mode === 'off');
+    const scrub = window.filmScrub = MotionEngine.Scrub({
+      blend: true, lerp: 0.09, cover: true, dpr: 2, fps: 24, aheadSec: 0.75, behindSec: 0.5,
+      canvas: document.getElementById('filmc'), driver: film, count, frozen: off,
+      src: (i) => `${PHONE ? 'frames-m' : 'frames'}/f_${String(i + 1).padStart(4, '0')}.jpg`,
+      onProgress: (p) => filmProgress(p)
+    });
+    // Motion Off or reduced motion: the film holds its final sharp frame and the last caption; On picks up from the scroll position again
+    if (window.Motion) Motion.on(() => { if (off()) { scrub.showFrame(count - 1); filmProgress(.999); } else scrub.settle(); });
+  }, { rootMargin: '1500px 0px' }).observe(film);
 })();
 
 // Level 3: a payment lands, Sola splits it into three pots that fill round by round
@@ -410,13 +562,56 @@ new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.
     note.textContent = ''; f.classList.add('busy'); btn.textContent = 'Sending…'; btn.disabled = true;
     try {
       const r = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, company: f.company.value }) });
-      if (!r.ok) throw new Error(r.status);
-      f.classList.add('sent'); note.classList.add('sr'); note.textContent = 'Sent. Check your inbox. Deepanshu will be in touch.';
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok || !d.ok) throw new Error('send');
+      f.classList.add('sent'); note.classList.add('sr'); note.textContent = 'Sent. The details are on their way to your inbox.';
     } catch {
       note.textContent = 'Could not send just now. Please try again in a moment.';
-      btn.textContent = 'Open account'; btn.disabled = false;
+      btn.textContent = 'Send me the story'; btn.disabled = false;
     } finally { f.classList.remove('busy'); }
   });
+})();
+(() => { const g = document.querySelector('.brands'), tiles = [...g.children];
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let rects = null, ev = null;   // tile boxes, measured on the first move after any scroll
+    const paint = () => { const e = ev; ev = null; if (!e) return; rects = rects || tiles.map(t => t.getBoundingClientRect());
+      tiles.forEach((t, i) => { t.style.setProperty('--x', (e.clientX - rects[i].left) + 'px'); t.style.setProperty('--y', (e.clientY - rects[i].top) + 'px'); }); };
+    g.addEventListener('pointermove', (e) => { if (!ev) requestAnimationFrame(paint); ev = e; });
+    g.addEventListener('pointerleave', () => { ev = null; tiles.forEach(t => { t.style.removeProperty('--x'); t.style.removeProperty('--y'); }); });
+    addEventListener('scroll', () => { rects = null; }, { passive: true });
+    addEventListener('resize', () => { rects = null; });
+  }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // scroll drives two things while the grid is near: the tiles rise into place column by column, and a band of
+  // light sweeps across them in reading order, lighting each tile in its brand colour as it passes
+  const cols = () => getComputedStyle(g).gridTemplateColumns.split(' ').length;
+  let near = false, queued = false;
+  const step = () => { queued = false; const r = g.getBoundingClientRect(), n = cols(), H = innerHeight;
+    const p = Math.min(1, Math.max(0, (H - r.top) / (H + r.height)));        // 0 as the grid enters, 1 as it leaves
+    const settle = Math.min(1, p / .45), ease = 1 - Math.pow(1 - settle, 3), band = p * 1.7 - .35;
+    tiles.forEach((t, i) => { const c = i % n, row = Math.floor(i / n), at = (c + row * .6) / (n + .6);
+      t.style.setProperty('--ty', ((1 - ease) * (70 + c * 36)).toFixed(1) + 'px');
+      t.style.setProperty('--lit', Math.max(0, 1 - Math.abs(band - at) * 3.2).toFixed(3)); }); };
+  const onScroll = () => { if (near && !queued) { queued = true; requestAnimationFrame(step); } };
+  new IntersectionObserver((es) => { near = es[0].isIntersecting; onScroll(); }, { rootMargin: '200px 0px' }).observe(g);
+  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll);
+})();
+(() => { const sec = document.getElementById('app'), tabs = [...sec.querySelectorAll('[role=tab]')], panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+  const pinned = matchMedia('(min-width: 861px) and (min-height: 600px)');
+  let cur = 0;
+  const show = (i, focus) => { i = Math.max(0, Math.min(tabs.length - 1, i)); if (i === cur && !focus) return; cur = i;
+    tabs.forEach((t, k) => { const on = k === cur; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; panels[k].classList.toggle('on', on); panels[k].inert = !on; });
+    if (focus) tabs[cur].focus({ preventScroll: true }); };
+  // pinned: each quarter of the section's scroll shows the next screen; a click scrolls to that screen's quarter
+  const span = () => sec.offsetHeight - innerHeight;
+  const pick = (i, focus) => { if (pinned.matches) { show(i, focus); scrollTo({ top: sec.getBoundingClientRect().top + scrollY + span() * (i + .5) / tabs.length }); } else show(i, focus); };
+  tabs.forEach((t, i) => { t.addEventListener('click', () => pick(i));
+    t.addEventListener('keydown', (e) => { const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); pick(cur + d, true); } }); });
+  let near = false, queued = false;
+  const step = () => { queued = false; if (!pinned.matches) return; const p = -sec.getBoundingClientRect().top / Math.max(1, span()); show(Math.floor(Math.min(.999, Math.max(0, p)) * tabs.length)); };
+  const onScroll = () => { if (near && !queued) { queued = true; requestAnimationFrame(step); } };
+  new IntersectionObserver((es) => { near = es[0].isIntersecting; onScroll(); }).observe(sec);
+  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll);
 })();
 window.__ready = true;
 </script>

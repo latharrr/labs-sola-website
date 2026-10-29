@@ -18,6 +18,13 @@ Most websites sit still. Sola has three moving layers, and each one moves for a 
 | **Scroll film** | One unbroken camera move, from the cliff into the cabin and onto the laptop screen, driven by your scroll | Chained AI keyframes turned into video clips. Each clip is checked for hidden cuts, then split into frames that the page draws as you scroll. |
 | **Living diagram** | A payment lands, and Sola splits it into Tax, Savings and Spend, round after round | Drawn in code (SVG). It runs forever, pauses off screen, and holds still for visitors who prefer reduced motion. |
 
+## Also on the page
+
+- **Logo grid:** the platforms freelancers already get paid through. Scrolling makes the tiles rise into place while a band of light passes over them in each brand's colour. On a laptop the cursor carries a soft spotlight too.
+- **The app:** four concept screens (pots, invoices, a tax date, card rules). On a laptop the section pins and scrolling walks through them.
+- **Melting button:** the top button drips on hover, drawn with an SVG goo filter that only runs while it is hovered.
+- **Questions:** short, honest answers, including that Sola is not a bank.
+
 ## How it was built
 
 1. **Design system first.** The type scale, colours, spacing and components were fixed before any content was made.
@@ -27,7 +34,7 @@ Most websites sit still. Sola has three moving layers, and each one moves for a 
 
 ## Built to perform
 
-- **Light on phones:** the first screen loads about 0.4 MB.
+- **Light on phones:** the first screen loads under 1 MB, and the film keeps only about a second of decoded frames in memory.
 - **Film frames load late:** they download only as you scroll near the film, and phones get a lighter cropped set.
 - **Easy to use:** every tap target is at least 44 px, there's no sideways scroll, and the page respects reduced-motion settings.
 - **No framework:** plain HTML, CSS and JavaScript.

@@ -48,6 +48,7 @@
   const TOOL = {
     higgsfield: { c: '#c5f74f', name: 'Higgsfield', ic: `<img alt="" src="${HF}">` },
     eleven: { c: '#c5f74f', name: 'Higgsfield · Eleven v4', ic: `<img alt="" src="${HF}">` },
+    ai: { c: '#ffbe8a', name: 'AI-generated', ic: '<span class="ms-ic">AI</span>' },
     code: { c: '#7cc4ff', name: 'Code', ic: '<span class="ms-ic">&lt;/&gt;</span>' },
     lottie: { c: '#ffb36b', name: 'Lottie', ic: '<span class="ms-ic">L</span>' }
   };
@@ -73,10 +74,9 @@
 
   function summary() {
     const all = [...document.querySelectorAll('[data-xray]')];
-    const hf = all.filter(n => /higgsfield|eleven/.test(n.dataset.xrayTool || ''));
-    const credits = hf.reduce((a, n) => a + (+n.dataset.xrayCost || 0), 0);
+    const ai = all.filter(n => n.dataset.xrayTool === 'ai').length;
     const code = all.filter(n => (n.dataset.xrayTool || 'code') === 'code').length;
-    sum.innerHTML = `<div class="ms-row"><img alt="" src="${HF}"><span><b>${hf.length}</b> Higgsfield assets <span class="ms-dim">· ${credits} credits</span></span></div>
+    sum.innerHTML = `<div class="ms-row"><span class="ms-ic" style="width:18px;height:18px;border-radius:4px;display:grid;place-items:center;background:#ffbe8a;color:#0b0c0f;font:700 9px/1 ui-monospace,Menlo,monospace">AI</span><span><b>${ai}</b> AI-generated visuals <span class="ms-dim">· made with Seedream and Seedance</span></span></div>
       <div class="ms-row" style="margin-top:6px"><span class="ms-ic" style="width:18px;height:18px;border-radius:4px;display:grid;place-items:center;background:#7cc4ff;color:#0b0c0f;font:700 9px/1 ui-monospace,Menlo,monospace">&lt;/&gt;</span><span><b>${code}</b> code loops <span class="ms-dim">· 0 credits</span></span></div>`;
   }
 
