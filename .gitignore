@@ -21,3 +21,6 @@
 !api/
 !api/subscribe.mjs
 !vercel.json
+!media/
+!media/sola-launch-*.mp4
+!media/sola-launch-preview.gif
