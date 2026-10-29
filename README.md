@@ -14,7 +14,7 @@ Most websites sit still. Sola has three moving layers, and each one moves for a 
 
 | Layer | What you see | How it's made |
 |---|---|---|
-| **Living hero** | A glass cabin on a sea cliff at dawn, with mist that slowly breathes | AI-generated footage, looped forwards and back so the loop has no seam. Phones get their own portrait cut. |
+| **Living hero** | A glass cabin on a green sea cliff at golden hour, with clouds drifting endlessly to one side | AI footage made from the footer landscape. The light is held steady frame by frame and the end crossfades into the start, so the loop has no cut. Phones get their own portrait cut. |
 | **Scroll film** | One unbroken camera move, from the cliff into the cabin and onto the laptop screen, driven by your scroll | Chained AI keyframes turned into video clips. Each clip is checked for hidden cuts, then split into frames that the page draws as you scroll. |
 | **Living diagram** | A payment lands, and Sola splits it into Tax, Savings and Spend, round after round | Drawn in code (SVG). It runs forever, pauses off screen, and holds still for visitors who prefer reduced motion. |
 
